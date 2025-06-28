@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact • Yash Chaudhary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+
+  <header>
+    <h1 class="fade-in">Send a Message!</h1>
+    <nav class="fade-in nav-links">
+      <a href="index.html">Home</a> |
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="fade-in delayed">
+    <form id="messageForm" class="contact-form">
+
+      <label for="user-name">Your Name</label>
+      <input
+        type="text"
+        name="name"
+        id="user-name"
+        placeholder="Enter your name"
+        required
+      />
+
+      <label for="user-email">Your Email</label>
+      <input
+        type="email"
+        name="email"
+        id="user-email"
+        placeholder="Enter your email"
+        required
+      />
+
+      <label for="subject">Subject</label>
+      <input
+        type="text"
+        name="subject"
+        id="subject"
+        placeholder="Subject"
+        required
+      />
+
+      <label for="message">Your Message</label>
+      <textarea
+        name="message"
+        id="message"
+        rows="6"
+        placeholder="Write your message here"
+        required
+      ></textarea>
+
+      <label for="attachment">Attach File (optional)</label>
+      <input type="file" name="attachment" id="attachment" />
+
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

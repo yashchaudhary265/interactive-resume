@@ -1,0 +1,456 @@
+/* Video background */
+/* Enable 3D on the main container */
+.content-container {
+  perspective: 800px;
+  transform-style: preserve-3d;
+}
+
+/* Prepare each section for 3D transforms */
+.content-container section {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+}
+
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3); /* Optional: adjust for readability */
+  z-index: -1;
+}
+
+/* Robotic font look */
+body {
+  font-family: "Courier New", Courier, monospace;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 30px 10px;
+  color: white;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Content Sections */
+main {
+  padding: 30px 10%;
+}
+
+section {
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  color: black;
+}
+
+/* Footer */
+footer {
+  background-color: #222;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+/* Image Styling */
+.profile-img {
+  width: 180px;
+  height: 220px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 3px solid #3498db;
+  margin: 0 auto 15px;
+  display: block;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+#name {
+  font-size: 2.5rem;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid #00f0ff;
+  width: 0;
+  animation: typing 2.5s steps(30, end) forwards, blink 0.7s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 18ch } /* Adjust to your name length */
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+
+/* Form Styling */
+form {
+  margin-top: 20px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2c80b4;
+}
+body {
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+section h2:hover {
+  color: #000000;
+  text-shadow: 0 0 10px #f4f3f5, 0 0 20px #00f0ff;
+  transition: all 0.3s ease-in-out;
+}
+body {
+  background-color: black;
+  color: #000;
+  text-shadow: grey;
+}
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Initial state: all sections full opacity */
+.content-container section {
+  transition: opacity 0.4s ease;
+}
+
+/* When hovering over the container */
+.content-container:hover section {
+  opacity: 0.2;
+}
+
+/* Keep the one you're hovering on fully visible */
+.content-container section:hover {
+  opacity: 1 !important;
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+#generate-ai {
+  background-color: #00ffcc;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  transition: background 0.3s ease;
+}
+
+#generate-ai:hover {
+  background-color: #00ccaa;
+}
+#suggestion-box {
+  background: #f0f0f0;
+  border-radius: 8px;
+  margin-top: 10px;
+  padding: 10px;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+#suggestion-box.hidden {
+  display: none;
+}
+
+#suggestion-box p {
+  cursor: pointer;
+  padding: 5px;
+  margin: 0;
+}
+
+#suggestion-box p:hover {
+  background: #e0e0e0;
+}
+.typing {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #00ffcc;
+  width: 0;
+  animation: typing 2s steps(30, end) forwards, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: #00ffcc; }
+}
+#messageForm textarea {
+  width: 100%;
+  min-height: 150px;    /* roomier by default */
+  rows: 6;              /* for browsers that honor the attribute */
+  padding: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Flex layout for the Generate + Send buttons */
+#messageForm .button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+#messageForm .button-group button {
+  flex: 1;
+}
+
+/* Preset inputs styling (readonly look) */
+#messageForm input[readonly],
+#messageForm textarea[readonly] {
+  background: #f0f4f8;
+  color: #333;
+}/* Ensure inputs and textarea are full-width and always visible */
+#messageForm input,
+#messageForm textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Distinct background for readonly fields */
+#messageForm input[readonly] {
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+/* Roomier textarea */
+#messageForm textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Button group layout */
+#messageForm .button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+#messageForm .button-group button {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Optional: hover effects */
+#messageForm .button-group button:hover {
+  background-color: #eee;
+}
+/* Skills “bubble cloud” */
+.skill-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+.skill-bubble {
+  background: white;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  animation: float 4s ease-in-out infinite;
+}
+
+.skill-bubble:hover {
+  transform: translateY(-6px) scale(1.05);
+}
+
+.skill-bubble img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.skill-bubble span {
+  margin-top: 4px;
+  font-size: 0.7rem;
+  color: #222;
+  text-align: center;
+}
+
+/* gentle up/down floating */
+/* gentle up/down floating */
+@keyframes float {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+.skill-bubble {
+  /* …existing rules… */
+  animation: float 4s ease-in-out infinite alternate;
+}
+
+/* Stagger via nth-child */
+.skill-bubble:nth-child(1) { animation-delay: 0s;  }
+.skill-bubble:nth-child(2) { animation-delay: 0.5s; }
+.skill-bubble:nth-child(3) { animation-delay: 1s;   }
+.skill-bubble:nth-child(4) { animation-delay: 1.5s; }
+.skill-bubble:nth-child(5) { animation-delay: 2s;   }
+.skill-bubble:nth-child(6) { animation-delay: 2.5s; }
+/* add more as needed */
+/* Fade-in on load */
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.fade-in.delayed {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Input focus animation */
+.contact-form input,
+.contact-form textarea {
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #00ffcc;
+  box-shadow: 0 0 8px rgba(0,255,204,0.5);
+  outline: none;
+}
+
+/* Button hover animation */
+.btn-primary {
+  background-color: #3498db;
+  color: #fff;
+  transition: background 0.3s, transform 0.1s;
+}
+
+.btn-primary:hover {
+  background-color: #2c80b4;
+  transform: translateY(-2px);
+}
+
+/* Layout tweaks */
+body {
+  background-color: #111;
+  color: #eee;
+  font-family: 'Orbitron', sans-serif;
+}
+
+header {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.nav-links a {
+  color: #9b59b6;
+  text-decoration: none;
+  margin: 0 6px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #fff;
+}
+
+main {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.contact-form label {
+  display: block;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.button-group {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+
