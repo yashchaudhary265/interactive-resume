@@ -31,8 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       message: form.message.value.trim()
     };
     try {
-      const res = await fetch("https://interactive-resume-backend.onrender.com/send-message", {
-
+      const res = await fetch("/send-message", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify(data)
