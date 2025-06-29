@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (pic) {
     pic.addEventListener("click", () => {
       pic.style.transition = "transform 0.3s ease";
-      pic.style.transform  = "rotateY(360deg)";
+      pic.style.transform = "rotateY(360deg)";
       setTimeout(() => (pic.style.transform = "none"), 600);
     });
   }
@@ -32,17 +32,20 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     try {
       const res = await fetch("/send-message", {
-        method:  "POST",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify(data)
+        body: JSON.stringify(data)
       });
+
       const json = await res.json();
-      if (json.status === "success") {
+
+      if (res.ok && json.success) {
         alert("Message sent!");
         form.reset();
       } else {
-        alert("Error: " + json.message);
+        alert("Error: " + (json.error || "Unknown error"));
       }
+
     } catch (err) {
       console.error(err);
       alert("Network error; try again.");
@@ -55,17 +58,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const midY = window.innerHeight / 2;
     sections.forEach(sec => {
       const rect = sec.getBoundingClientRect();
-      // distance from section center to viewport center
       const offset = (rect.top + rect.height / 2) - midY;
       const maxOffset = midY + rect.height / 2;
-      // normalized between -1 and +1
       const norm = Math.max(-1, Math.min(1, offset / maxOffset));
-      const angle = norm * 15; // tilt up to ±15°
+      const angle = norm * 15;
       sec.style.transform = `rotateX(${ -angle }deg)`;
     });
   };
 
-  // run once and on scroll
   rotateSection();
   window.addEventListener("scroll", rotateSection);
 });
