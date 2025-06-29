@@ -9,7 +9,8 @@
         - backend/**
     envVars:
       - key: MONGO_URI
-        value: mongodb+srv://yashch11:U3IPZtG8wTRq8C2j@cluster0.9esovcd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+        value: ${MONGO_URI}  
+        
     plan: free
     region: oregon
 
