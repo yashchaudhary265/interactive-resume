@@ -22,35 +22,37 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Contact form submit
-  document.getElementById("messageForm").addEventListener("submit", async e => {
-    e.preventDefault();
-    const form = e.target;
-    const data = {
-      name:    form.name.value.trim(),
-      email:   form.email.value.trim(),
-      message: form.message.value.trim()
-    };
-    try {
-      const res = await fetch("/send-message", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
+  const form = document.getElementById("messageForm");
+  if (form) {
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        message: form.message.value.trim()
+      };
 
-      const json = await res.json();
+      try {
+        const res = await fetch("/send-message", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
 
-      if (res.ok && json.success) {
-        alert("Message sent!");
-        form.reset();
-      } else {
-        alert("Error: " + (json.error || "Unknown error"));
+        const json = await res.json();
+
+        if (res.ok && json.success) {
+          alert("Message sent!");
+          form.reset();
+        } else {
+          alert("Error: " + (json.error || "Unknown error"));
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Network error; try again.");
       }
-
-    } catch (err) {
-      console.error(err);
-      alert("Network error; try again.");
-    }
-  });
+    });
+  }
 
   // 3D rotate sections on scroll
   const sections = document.querySelectorAll(".content-container section");

@@ -19,19 +19,20 @@ try:
     db = client[db_name]
     collection = db['contacts']
 except Exception as e:
-    print(f"❌ Error connecting to MongoDB: {e}")
+    print(f"❌ MongoDB connection error: {e}")
     collection = None
 
-# Serve frontend
+# Serve index.html
 @app.route('/')
 def serve_index():
     return send_from_directory(app.static_folder, 'index.html')
 
+# Serve static frontend files
 @app.route('/<path:path>')
 def serve_static(path):
     return send_from_directory(app.static_folder, path)
 
-# API endpoint
+# API to handle contact form
 @app.route('/send-message', methods=['POST'])
 def send_message():
     if not collection:
