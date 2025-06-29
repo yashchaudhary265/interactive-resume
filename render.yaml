@@ -1,4 +1,4 @@
- services:
+services:
   - type: web
     name: interactive-resume-backend
     env: python
@@ -7,10 +7,6 @@
     buildFilter:
       paths:
         - backend/**
-    envVars:
-      - key: MONGO_URI
-        value: ${MONGO_URI}  
-        
     plan: free
     region: oregon
 
