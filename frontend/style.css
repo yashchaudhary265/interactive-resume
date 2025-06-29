@@ -27,7 +27,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.3); /* Optional: adjust for readability */
+  background: rgba(0, 0, 0, 0.15); /* Optional: adjust for readability */
   z-index: -1;
 }
 
