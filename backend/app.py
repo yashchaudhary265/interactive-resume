@@ -4,6 +4,8 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 from datetime import datetime
 import os
+from datetime import datetime, timezone
+
 
 # Load environment variables
 load_dotenv()
@@ -35,10 +37,13 @@ def serve_static(path):
 # API to handle contact form
 @app.route('/send-message', methods=['POST'])
 def send_message():
-    if not collection:
+    if collection is None:
         return jsonify({"error": "Database connection failed"}), 500
-
+    
     data = request.get_json()
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 400
+
     name = data.get('name')
     email = data.get('email')
     message = data.get('message')
@@ -50,7 +55,8 @@ def send_message():
         "name": name,
         "email": email,
         "message": message,
-        "timestamp": datetime.utcnow()
+        "timestamp": datetime.now(timezone.utc)
+
     }
 
     try:
