@@ -1,18 +1,13 @@
 services:
   - type: web
-    name: interactive-resume-backend
+    name: interactive-resume
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: python backend/app.py
-    buildFilter:
-      paths:
-        - backend/**
+    envVars:
+      - key: MONGO_URI
+        value: ${MONGO_URI}
+      - key: DB_NAME
+        value: interactive_resume
     plan: free
     region: oregon
-
-staticSites:
-  - name: interactive-resume-frontend
-    buildCommand: ""
-    staticPublishPath: frontend
-    indexDocument: index.html
-    errorDocument: index.html
