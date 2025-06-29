@@ -12,6 +12,7 @@ load_dotenv()
 app = Flask(__name__, static_folder='../frontend', static_url_path='/')
 CORS(app)
 
+# MongoDB connection function (safer for Render workers)
 def get_collection():
     mongo_uri = os.getenv("MONGO_URI")
     db_name = os.getenv("DB_NAME", "interactive_resume")
@@ -24,17 +25,19 @@ def get_collection():
 def serve_index():
     return send_from_directory(app.static_folder, 'index.html')
 
-# Serve static frontend files
+# Serve static files
 @app.route('/<path:path>')
 def serve_static(path):
     return send_from_directory(app.static_folder, path)
 
-# Handle contact form
+# API to handle contact form
 @app.route('/send-message', methods=['POST'])
 def send_message():
     try:
+        print("📩 Received POST request")
         collection = get_collection()
     except Exception as e:
+        print(f"❌ DB connection error: {e}")
         return jsonify({"error": f"Database connection failed: {e}"}), 500
 
     data = request.get_json()
@@ -56,11 +59,15 @@ def send_message():
     }
 
     try:
+        print("📤 Inserting to MongoDB...")
         collection.insert_one(contact_data)
+        print("✅ Insert successful")
         return jsonify({"success": "Message received!"}), 200
     except Exception as e:
+        print(f"❌ Mongo insert failed: {e}")
         return jsonify({"error": f"Database error: {str(e)}"}), 500
 
+# Run Flask app
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
