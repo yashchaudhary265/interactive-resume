@@ -4,6 +4,9 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 from datetime import datetime, timezone
 import os
+import certifi
+
+client = MongoClient(mongo_uri, tls=True, tlsCAFile=certifi.where())
 
 # Load environment variables from .env
 load_dotenv()
