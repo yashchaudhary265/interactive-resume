@@ -1,7 +1,7 @@
 console.log("Script is running");
 
-// 🟢 Replace with your actual Render backend URL:
-const BACKEND_URL = "https://interactive-resume-backend.onrender.com";
+// ✅ Replace with your actual Render backend URL:
+const BACKEND_URL = "https://interactive-resume-6shg.onrender.com";
 
 document.getElementById('generate-ai').addEventListener('click', async () => {
   const name = document.getElementById('user-name').value;
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const maxOffset = midY + rect.height / 2;
       const norm = Math.max(-1, Math.min(1, offset / maxOffset));
       const angle = norm * 15;
-      sec.style.transform = `rotateX(${ -angle }deg)`;
+      sec.style.transform = `rotateX(${-angle}deg)`;
     });
   };
 
