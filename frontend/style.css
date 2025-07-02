@@ -488,9 +488,11 @@ body {
 
 h1 {
   text-align: center;
-  color: #003c53;
+  color: #000000; /* Or your preferred color */
+  font-size: 2.5rem; /* Adjust as needed */
   padding-top: 1rem;
 }
+
 
 .nav-links {
   text-align: center;

@@ -1,40 +1,47 @@
+console.log("Contact Script is running");
+
+// ✅ Replace with your actual Render backend URL:
 const BACKEND_URL = "https://interactive-resume-6shg.onrender.com";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("messageForm");
-
-  if (form) {
-    form.addEventListener("submit", async (e) => {
+  // Smooth scrolling
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", e => {
       e.preventDefault();
+      document
+        .querySelector(link.getAttribute("href"))
+        ?.scrollIntoView({ behavior: "smooth" });
+    });
+  });
 
-      const formData = new FormData();
-      formData.append("name", document.getElementById("user-name").value.trim());
-      formData.append("email", document.getElementById("user-email").value.trim());
-      formData.append("subject", document.getElementById("subject").value.trim());
-      formData.append("message", document.getElementById("message").value.trim());
-
-      const attachment = document.getElementById("attachment").files[0];
-      if (attachment) {
-        formData.append("attachment", attachment);
-      }
+  const form = document.getElementById("messageForm");
+  if (form) {
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email?.value.trim() || "",
+        message: form.message.value.trim()
+      };
 
       try {
         const res = await fetch(`${BACKEND_URL}/send-message`, {
           method: "POST",
-          body: formData,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
         });
 
-        const result = await res.json();
+        const json = await res.json();
 
-        if (res.ok && result.success) {
-          alert("✅ Message sent successfully!");
+        if (res.ok && json.success) {
+          alert("✅ Message sent!");
           form.reset();
         } else {
-          alert("❌ Failed to send: " + (result.error || "Unknown error"));
+          alert("❌ Error: " + (json.error || "Unknown error"));
         }
       } catch (err) {
         console.error(err);
-        alert("⚠️ Network error. Please try again.");
+        alert("⚠️ Network error; try again.");
       }
     });
   }
