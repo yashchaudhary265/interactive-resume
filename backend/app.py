@@ -12,6 +12,17 @@ load_dotenv()
 app = Flask(__name__, static_folder="../frontend", static_url_path='/')
 CORS(app)
 
+def serve_index():
+    return send_from_directory(app.static_folder, "index.html")
+
+@app.route("/<path:path>")
+def serve_file(path):
+    file_path = os.path.join(app.static_folder, path)
+    if os.path.exists(file_path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, "index.html")
+
 # 🔐 Environment Variables
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
