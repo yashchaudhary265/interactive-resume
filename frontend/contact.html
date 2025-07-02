@@ -5,6 +5,113 @@
   <title>Contact • Yash Chaudhary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="style.css" rel="stylesheet" />
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #1a1a1a;
+      padding: 1rem 2rem;
+      text-align: center;
+      border-bottom: 2px solid #00ffaa;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #00ffaa;
+    }
+
+    nav {
+      margin-top: 0.5rem;
+    }
+
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 1rem;
+    }
+
+    nav a:hover {
+      color: #00ffaa;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .contact-form {
+      background: #222;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .contact-form input[type="file"] {
+      padding: 0.2rem;
+      background: #000;
+    }
+
+    .button-group {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .btn {
+      background: #00ffaa;
+      color: #000;
+      padding: 0.7rem 2rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #00ddaa;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
 
@@ -17,43 +124,19 @@
   </header>
 
   <main class="fade-in delayed">
-    <form id="messageForm" class="contact-form">
+    <form id="messageForm" class="contact-form" enctype="multipart/form-data">
 
       <label for="user-name">Your Name</label>
-      <input
-        type="text"
-        name="name"
-        id="user-name"
-        placeholder="Enter your name"
-        required
-      />
+      <input type="text" name="name" id="user-name" placeholder="Enter your name" required />
 
       <label for="user-email">Your Email</label>
-      <input
-        type="email"
-        name="email"
-        id="user-email"
-        placeholder="Enter your email"
-        required
-      />
+      <input type="email" name="email" id="user-email" placeholder="Enter your email" required />
 
       <label for="subject">Subject</label>
-      <input
-        type="text"
-        name="subject"
-        id="subject"
-        placeholder="Subject"
-        required
-      />
+      <input type="text" name="subject" id="subject" placeholder="Subject" required />
 
       <label for="message">Your Message</label>
-      <textarea
-        name="message"
-        id="message"
-        rows="6"
-        placeholder="Write your message here"
-        required
-      ></textarea>
+      <textarea name="message" id="message" rows="6" placeholder="Write your message here" required></textarea>
 
       <label for="attachment">Attach File (optional)</label>
       <input type="file" name="attachment" id="attachment" />
