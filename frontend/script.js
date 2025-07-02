@@ -52,30 +52,33 @@ document.addEventListener("DOMContentLoaded", () => {
   if (form) {
     form.addEventListener("submit", async e => {
       e.preventDefault();
-
-      const formData = new FormData(form);
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email?.value.trim() || "",
+        message: form.message.value.trim()
+      };
 
       try {
         const res = await fetch(`${BACKEND_URL}/send-message`, {
           method: "POST",
-          body: formData
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
         });
 
-        const result = await res.json();
+        const json = await res.json();
 
-        if (res.ok && result.success) {
-          alert("✅ Message sent!");
+        if (res.ok && json.success) {
+          alert("Message sent!");
           form.reset();
         } else {
-          alert("❌ Failed to send: " + (result.error || "Unknown error"));
+          alert("Error: " + (json.error || "Unknown error"));
         }
       } catch (err) {
         console.error(err);
-        alert("⚠️ Network error. Please try again.");
+        alert("Network error; try again.");
       }
     });
   }
-});
 
   const sections = document.querySelectorAll(".content-container section");
   const rotateSection = () => {

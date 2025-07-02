@@ -423,7 +423,7 @@ header {
 }
 
 .nav-links a {
-  color: #00b7ff;
+  color: #003347;
   text-decoration: none;
   margin: 0 6px;
   transition: color 0.2s;
@@ -488,7 +488,7 @@ body {
 
 h1 {
   text-align: center;
-  color: #00b7ff;
+  color: #003c53;
   padding-top: 1rem;
 }
 
@@ -498,7 +498,7 @@ h1 {
 }
 
 .nav-links a {
-  color: #00b7ff;
+  color: #000000;
   text-decoration: none;
   margin: 0 1rem;
 }
