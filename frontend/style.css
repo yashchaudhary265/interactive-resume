@@ -467,5 +467,89 @@ main {
 @keyframes blink {
   50% { border-color: transparent; }
 }
+body {
+  margin: 0;
+  padding: 0;
+  background: #111;
+  font-family: 'Segoe UI', sans-serif;
+  color: #eee;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+h1 {
+  text-align: center;
+  color: #0f0;
+  padding-top: 1rem;
+}
+
+.nav-links {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.nav-links a {
+  color: #aa88ff;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+.contact-form {
+  max-width: 500px;
+  margin: auto;
+  background: #222;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+.contact-form label {
+  display: block;
+  margin-top: 1rem;
+  color: #ccc;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.3rem;
+  background: #000;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 0.4rem;
+}
+
+.contact-form input[type="file"] {
+  padding: 0.4rem;
+  background: #111;
+}
+
+.button-group {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.btn {
+  background-color: #0f0;
+  color: #000;
+  padding: 0.6rem 2rem;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0c0;
+}
 
 
