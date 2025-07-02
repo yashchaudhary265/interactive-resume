@@ -1,5 +1,8 @@
 console.log("Script is running");
 
+// 🟢 Replace with your actual Render backend URL:
+const BACKEND_URL = "https://interactive-resume-backend.onrender.com";
+
 document.getElementById('generate-ai').addEventListener('click', async () => {
   const name = document.getElementById('user-name').value;
   const email = document.getElementById('user-email').value;
@@ -7,7 +10,7 @@ document.getElementById('generate-ai').addEventListener('click', async () => {
   const prompt = `Generate a professional message for an interactive resume site visitor named ${name} with email ${email}`;
 
   try {
-    const response = await fetch('http://127.0.0.1:5000/generate-ai', {
+    const response = await fetch(`${BACKEND_URL}/generate-ai`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ prompt })
@@ -27,7 +30,6 @@ document.getElementById('generate-ai').addEventListener('click', async () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Smooth scrolling
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
@@ -37,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Profile pic spin
   const pic = document.getElementById("profilePic");
   if (pic) {
     pic.addEventListener("click", () => {
@@ -47,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Contact form submit
   const form = document.getElementById("messageForm");
   if (form) {
     form.addEventListener("submit", async e => {
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       try {
-        const res = await fetch("http://127.0.0.1:5000/send-message", {
+        const res = await fetch(`${BACKEND_URL}/send-message`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
@@ -80,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 3D rotate sections on scroll
   const sections = document.querySelectorAll(".content-container section");
   const rotateSection = () => {
     const midY = window.innerHeight / 2;
