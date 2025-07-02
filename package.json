@@ -1,0 +1,11 @@
+{
+  "name": "interactive-resume",
+  "scripts": {
+    "build": "tailwindcss -i ./frontend/style.css -o ./frontend/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0"
+  }
+}

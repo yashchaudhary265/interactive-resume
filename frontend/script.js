@@ -1,5 +1,31 @@
 console.log("Script is running");
 
+document.getElementById('generate-ai').addEventListener('click', async () => {
+  const name = document.getElementById('user-name').value;
+  const email = document.getElementById('user-email').value;
+
+  const prompt = `Generate a professional message for an interactive resume site visitor named ${name} with email ${email}`;
+
+  try {
+    const response = await fetch('http://127.0.0.1:5000/generate-ai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.generatedText) {
+      document.getElementById('user-message').value = data.generatedText;
+    } else {
+      alert('AI failed: ' + (data.error || 'No response from AI'));
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Network error. Make sure backend is running.");
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   // Smooth scrolling
   document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -28,12 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const data = {
         name: form.name.value.trim(),
-        email: form.email.value.trim(),
+        email: form.email?.value.trim() || "",
         message: form.message.value.trim()
       };
 
       try {
-        const res = await fetch("/send-message", {
+        const res = await fetch("http://127.0.0.1:5000/send-message", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)

@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            orbitron: ['Orbitron', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -42,20 +55,23 @@
   <main>
     <div class="content-container">
       <section id="contact">
-    <h2>Contact</h2>
+    <h1 class="typing text-4xl font-bold text-white text-center my-4 font-orbitron">Contacts</h1>
+
     <p>Email: yashch11@gmail.com</p>
     <p>Phone: +91 9205161376</p>
     <p><a href="https://www.linkedin.com/in/yashchaudhary111203/" target="_blank">LinkedIn</a> | <a href="https://github.com/yashchaudhary265" target="_blank">GitHub</a></p>
   </section>
       <section id="summary">
-    <h2 class="typing">Summary</h2>
+    <h1 class="typing text-4xl font-bold text-white text-center my-4 font-orbitron">Summary</h1>
+
     <p>Hello! I’m Yash Chaudhary, a Computer Science student at JIIT Noida with a passion for solving business problems through data-driven, full-stack solutions. I specialize in building scalable web applications and generating actionable insights using tools like Python, SQL, Power BI, and modern JavaScript frameworks.</p>
     <p>My journey so far has equipped me with strong analytical thinking, frontend/backend engineering skills, and a deep interest in data analysis. From designing clean user interfaces to interpreting trends from complex datasets, I bridge the gap between technology and business strategy.</p>
     <p>I’m always looking to collaborate on impactful projects, internships, or product ideas. Let’s connect and explore how we can create value together!</p>
   </section>
 
     <section id="education">
-      <h2 class="typing">Education</h2>
+      <h1 class="typing text-4xl font-bold text-white text-center my-4 font-orbitron">Education</h1>
+
       <ul>
         <li>Jaypee Institute of Information Technology, Noida (2023–2026)  </li>
         <li>ABES Engineering College, Ghaziabad (2022–2023) – CGPA: 7.365</li>
@@ -64,14 +80,16 @@
     </section>
 
    <section id="contact">
-    <h2>Let’s Build Together</h2>
-   <form id="messageForm">
+    <h1 class="typing text-4xl font-bold text-white text-center my-4 font-orbitron">Lets Build Together</h1>
+
+   <form id="messageForm" class="space-y-4">
   <input
     type="text"
     name="name"
     id="user-name"
     placeholder="Your Name"
     required
+    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
   >
   <input
     type="email"
@@ -79,6 +97,7 @@
     id="user-email"
     placeholder="Your Email"
     required
+    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
   >
   <textarea
     name="message"
@@ -86,17 +105,26 @@
     rows="6"
     placeholder="Your Message…"
     required
+    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
   ></textarea>
-  <div class="button-group">
-  <button type="submit">Send</button>
-</div>
+
+  <div class="flex flex-wrap gap-4">
+    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+      Send
+    </button>
+    <button type="button" id="generate-ai" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition">
+      Generate with AI
+    </button>
+  </div>
 </form>
+
   </section>
 
 
 
     <section id="experience">
-  <h2 class="typing">Experience</h2>
+  <h1 class="typing text-4xl font-bold text-white text-center my-4 font-orbitron">Experience</h1>
+
 
   <!-- Existing entry -->
   <h3>Business Analyst Intern – Lawlevelup (Jun–Aug 2025)</h3>
@@ -118,7 +146,8 @@
 
 
     <section id="skills">
-  <h2 class="typing">Skills</h2>
+  <h1 class="typing text-4xl font-bold text-white text-center my-4 font-orbitron">Skills</h1>
+
   <div class="skill-cloud">
     <div class="skill-bubble">
       <img src="assets/icons/DATAVISUALIZATION.png" alt="DATAVISUALIZATION" />
@@ -181,7 +210,8 @@
 
 
      <section id="projects">
-    <h2 class="typing">Projects</h2>
+    <h1 class="typing text-4xl font-bold text-white text-center my-4 font-orbitron">Projects</h1>
+
     <ul>
       <li><h2>NeuraMail</h2>: • Automates email categorization by importance, query type, and intent for efficient routing.
 
@@ -214,7 +244,9 @@
   </section>
 
      <section id="certifications">
-    <h2 class="typing">Certifications</h2>
+    <h1 class="typing text-4xl font-bold text-white text-center my-4 font-orbitron">Certifications</h1>
+
+
     <ul>
       <li><a href="https://www.linkedin.com/learning/certificates/b3f0c804f07699e135f9511e78d912ef004de5cc5a544932bbdb945187d450f9" target="_blank">Data Analysis – Microsoft & LinkedIn</a></li>
       <li><a href="https://drive.google.com/file/d/1ocST2EMm62KfaecAS15s8AgoTbb5lNrN/view?usp=sharing" target="_blank">JavaScript – Great Learning</a></li>
