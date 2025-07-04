@@ -161,7 +161,6 @@ section h2:hover {
 /* Keep the one you're hovering on fully visible */
 .content-container section:hover {
   opacity: 1 !important;
-  transform: scale(1.02);
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
   transition: all 0.3s ease-in-out;
 }
