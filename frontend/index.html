@@ -2,18 +2,6 @@
 <html lang="en">
 <head>
   
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            orbitron: ['Orbitron', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -23,20 +11,17 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="particles-js"></div>
 
-  <!-- Background Video -->
-  <video autoplay muted loop playsinline id="bg-video">
-    <source src="assets/video.mp4" type="video/mp4">
-    Your browser does not support HTML5 video.
-  </video>
 
+<header>
   <!-- Optional dark overlay (for better text readability) -->
-  <div class="overlay"></div>
+  <div id="particles-js"></div>
 
-  <header>
+  
     <img src="assets/yash.png" alt="Yash Chaudhary" class="profile-img" />
-    <h1 class="typing text-4xl font-bold text-white text-center my-4 font-orbitron"
->Yash Chaudhary</h1>
+    <h1 class="typing text-8xl font-bold text-white text-center my-4 font-orbitron">Yash Chaudhary</h1>
+
 
     
     <nav>
@@ -55,23 +40,40 @@
   </header>
 
   <main>
-    <div class="content-container">
+    <div class="container">
+      <div class="form-box">
       <section id="contact">
     <h2 class="typing text-4xl font-bold text-black text-center my-4 font-orbitron">Contacts</h2>
 
     <p>Email: yashch11@gmail.com</p>
     <p>Phone: +91 9205161376</p>
     <p><a href="https://www.linkedin.com/in/yashchaudhary111203/" target="_blank">LinkedIn</a> | <a href="https://github.com/yashchaudhary265" target="_blank">GitHub</a></p>
-  </section>
-      <section id="summary">
+  </section></div></div>
+     <div class="container">
+      <div class="form-box"> <section id="summary">
     <h2 class="typing text-4xl font-bold text-black text-center my-4 font-orbitron">Summary</h2>
 
-    <p>Hello! I’m Yash Chaudhary, a Computer Science student at JIIT Noida with a passion for solving business problems through data-driven, full-stack solutions. I specialize in building scalable web applications and generating actionable insights using tools like Python, SQL, Power BI, and modern JavaScript frameworks.</p>
-    <p>My journey so far has equipped me with strong analytical thinking, frontend/backend engineering skills, and a deep interest in data analysis. From designing clean user interfaces to interpreting trends from complex datasets, I bridge the gap between technology and business strategy.</p>
-    <p>I’m always looking to collaborate on impactful projects, internships, or product ideas. Let’s connect and explore how we can create value together!</p>
-  </section>
+    <p><strong>From Passion to Practice: How I Turned MERN Stack Development into My Daily Hobby</strong><br>
+<em>by Yash Chaudhary</em></p>
 
-    <section id="education">
+<p>If there’s one thing that truly excites me every single day, it’s building.</p>
+
+<p>I’m Yash Chaudhary, a Computer Science student at JIIT Noida, and while many people have a range of hobbies—from music to sports—mine is simple: <strong>building full-stack web applications</strong>. I spend most of my free time crafting and scaling projects using the <strong>MERN stack</strong> (MongoDB, Express.js, React.js, Node.js). What started as curiosity has now become my creative outlet and strongest skill.</p>
+
+<p>My love for development isn’t confined to academic projects. I constantly push myself to bring real-world ideas to life—whether it's an AI-powered resume builder, a data visualization dashboard, or platforms that connect people with purpose. For me, building applications is more than code—it's about solving problems, creating value, and leaving a footprint through technology.</p>
+
+<p>Over the past year, I’ve sharpened my skills in both <strong>frontend and backend engineering</strong>, worked extensively with <strong>MongoDB</strong> for scalable storage, and deployed apps using <strong>Render</strong> and <strong>Vercel</strong>. I also dive deep into <strong>data analysis</strong> using Python, SQL, and Power BI, making sure my solutions are not just functional but insight-driven.</p>
+
+<p>From sleepless nights debugging React states to designing intuitive UIs, I genuinely enjoy every step of the development process. It’s not just a career path—it’s what I love to do.</p>
+
+<p>If you’re looking to collaborate on meaningful tech projects, need a builder who’s obsessed with clean code and scalable systems, or just want to brainstorm big ideas—I’m always up for it.</p>
+
+<p><strong>Let’s build something great, together.</strong></p>
+
+  </section></div></div>
+
+    <div class="container">
+      <div class="form-box"><section id="education">
       <h2 class="typing text-4xl font-bold text-black text-center my-4 font-orbitron">Education</h2>
 
       <ul>
@@ -79,9 +81,10 @@
         <li>ABES Engineering College, Ghaziabad (2022–2023) – CGPA: 7.365</li>
         <li>Ryan International School – 12th: 91.2% | 10th: 88.4%</li>
       </ul>
-    </section>
+    </section></div></div>
 
-   <section id="contact">
+   <div class="container">
+      <div class="form-box"><section id="contact">
     <h1 class="typing text-4xl font-bold text-black text-center my-4 font-orbitron">Lets Build Together</h1>
 
    <form id="messageForm" class="space-y-4">
@@ -120,34 +123,39 @@
   </div>
 </form>
 
-  </section>
+  </section></div></div>
 
 
 
-    <section id="experience">
+    <div class="container">
+      <div class="form-box"><section id="experience">
   <h2 class="typing text-4xl font-bold text-black text-center my-4 font-orbitron">Experience</h2>
 
 
-  <!-- Existing entry -->
-  <h3>Business Analyst Intern – Lawlevelup (Jun–Aug 2025)</h3>
-  <ul>
-    <li>Designed and deployed Power BI dashboards to monitor KPIs.</li>
-    <li>Extracted, cleaned data from SQL databases, improving delivery by 30%.</li>
-    <li>Automated reporting with Python (Pandas, Matplotlib), boosting productivity by 40%.</li>
-    <li>Performed market segmentation and customer profiling using advanced Excel techniques.</li>
-    <li>Created predictive models and shared insights with the leadership for strategic decisions.</li>
-  </ul>
+  
+  
 
   <!-- NEW Unified Mentor entry -->
-  <h3>Full Stack Developer Intern – Unified Mentor (Virtual) (Jun 2025–Aug 2025)</h3>
+  <h3>Full Stack Developer Intern – Unified Mentor(Jun 2025–Aug 2025)</h3>
   <ul>
-    <li>Developed a bridge-platform for investors and business people, an interactive resume web app, and a soil-farming agent tool.</li>
-    <li>Handled both frontend and backend development, plus deployment for all projects.</li>
+    <li>During my Full Stack Developer Internship at Unified Mentor (Jun 2025 – Aug 2025), I had the opportunity to work on multiple high-impact projects that combined innovation, user interaction, and scalable architecture. I contributed to building:</li>
+
+<li>An interactive MERN stack platform to bridge investors and entrepreneurs.</li>
+
+<li>An AI-powered resume web app with smart message replies.</li>
+
+<li>A soil farming agent tool featuring real-time data and animated visuals.</li>
+
+<li>These projects involved both frontend and backend development, with deployments handled via Render and Vercel, and data stored securely in MongoDB. I also implemented AI integrations for intelligent features and ensured responsive UI/UX using modern JavaScript frameworks like React and Vue.</li>
+
+<li>This internship honed my skills in full-stack development, real-time interactivity, AI integration, and modern deployment workflows.</li>
+   
   </ul>
-</section>
+</section></div></div>
 
 
-    <section id="skills">
+   <div class="container">
+      <div class="form-box"> <section id="skills">
   <h1 class="typing text-4xl font-bold text-black text-center my-4 font-orbitron">Skills</h1>
 
   <div class="skill-cloud">
@@ -208,44 +216,60 @@
       <span>Git</span>
     </div>
   </div>
-</section>
+</section></div></div>
 
 
-     <section id="projects">
+     <div class="container">
+      <div class="form-box"><section id="projects">
     <h2 class="typing text-4xl font-bold text-black text-center my-4 font-orbitron">Projects</h2>
 
     <ul>
-      <li><h2>NeuraMail</h2>: • Automates email categorization by importance, query type, and intent for efficient routing.
+      <li><h2>INVEST</h2><p><strong>INVEST: Bridging the Gap Between Entrepreneurs and Investors</strong></p>
 
+<p><em>INVEST</em> is a full-stack web platform built using the MERN stack (MongoDB, Express.js, React.js, and Node.js), designed to connect aspiring entrepreneurs with potential investors. It enables users to submit business ideas, showcase investor profiles, and explore a unified system for tracking all submissions in real time.</p>
 
+<p><strong>Key Features:</strong></p>
 
-     • Offers optional Automated Reply Mode using a Sentinal-trained AI assistant to craft responses in brand tone and style.
+<p><strong>1. Seamless Dual User Form Submissions</strong><br>
+Entrepreneurs can submit startup ideas, funding needs, and contact info. Investors can register their investment capacity and sector interests via intuitive forms.</p>
 
-     • Provides Manual Reply Mode with AI-suggested drafts or on-demand generative AI, ensuring human review and accuracy.
+<p><strong>2. Centralized MongoDB Storage</strong><br>
+All submissions are stored securely in MongoDB Atlas. Each user type (entrepreneur, investor) has a dedicated schema for validation and structure.</p>
 
-     • Built on secure AWS-authenticated infrastructure with MongoDB for encrypted data storage. <a href="https://github.com/Heria021/neuramail" target="_blank">GitHub</a></li>
-      <li><h2>Sentinal</h2>: • Platform for creating and deploying unlimited AI bots with RAG-based training on custom datasets (PDFs, documents, websites, company data).
+<p><strong>3. Data Visualization Add-on</strong><br>
+Includes bar graphs, pie charts, radar charts, and interactive 3D visualizations using Chart.js/D3.js for top 1000 Indian stocks. Adds powerful insight tools for investment trend analysis.</p>
 
-     • Seamless integration via API endpoints or iframe embeds for websites and software.
+<p><strong>Tech Stack:</strong></p>
 
-     • Real-time dashboard for uploading/updating documents, training bots, and interactive testing.
+<p>
+Frontend: React.js, Custom CSS, Particles.js<br>
+Backend: Node.js, Express.js<br>
+Database: MongoDB Atlas<br>
+Deployment: Vercel (frontend) + Render (backend)<br>
+Visualization: Chart.js, D3.js, Three.js<br>
+Form Processing: Axios, REST APIs
+</p>
 
-     • Robust security with AWS authentication and role-based access; scalable storage in MongoDB on AWS. <a href="https://github.com/Heria021/Sentinal" target="_blank">GitHub</a></li>
-      <li><h2>Contact Manager</h2>: A complete CRUD-based React application to manage and search contact records with routing and dynamic search filtering. Deployed with semantic UI components. <a href="https://github.com/yashchaudhary265/MY-APP" target="_blank">GitHub</a></li>
-      <li><h2>Loan Portfolio Analytics</h2>:- Analysed over 15,000 loan records using SQL, deriving key insights into loan performance and borrower behavior.
+<p><strong>Authentication & Security:</strong><br>
+Secure login/register system using bcrypt for password hashing. Role-based access can be added. Input validations are enforced throughout the backend to prevent abuse.</p>
 
-      - Designed a Power BI dashboard integrated with SQL for interactive visual reporting.</li>
-      <li><h2>Bank Payment Fraud Detection</h2>:- Designed a fraud detection pipeline on 594K+ bank payment records using EDA and ML.
+<p><strong>Deployment:</strong><br>
+Frontend is deployed via Vercel for global performance, while backend APIs are hosted using Render. The frontend consumes backend APIs directly with absolute routes. MongoDB Atlas handles real-time data updates.</p>
 
-     - Balanced data using SMOTE and trained multiple models including KNN, RF, and XGBoost (ROC AUC: 0.99).
+<p><strong>Why It Matters:</strong><br>
+Startup ecosystems lack streamlined platforms for investor-founder matching. <em>INVEST</em> bridges this gap by centralizing idea submission, investor interest, and interactive analytics. It improves discoverability, saves time, and encourages data-driven decisions.</p>
 
-     - Visualized fraud patterns and model performance using ROC curves</li>
-      <li><h2>Pharmacy DBMS</h2>:- Designed a relational database with 6 tables and wrote 15+ SQL queries using JOINs, subqueries, and aggregate functions to gain insights on sales trends, customer behaviour, and inventory management.
-     - Built a tracking system for monitoring inventory levels and customer purchase patterns.</li>
-    </ul>
-  </section>
+<p><strong>Future Enhancements:</strong><br>
+- Add real-time chat between users<br>
+- Enable download/export of submissions as PDF<br>
+- AI-powered pitch evaluation via Gemini API<br>
+- Matchmaking engine to align investors and entrepreneurs by sector</p>
+ <a href="https://invest-rose.vercel.app/register" target="_blank">LETS EXPLORE</a></li>
+      <li><h2>SOIL FARMING AGENT</h2><p><strong>Soil Farming Agent: Smart Soil Intelligence Portal for Farmers</strong></p> <p><em>Soil Farming Agent</em> is a full-stack MERN (MongoDB, Express.js, React.js, Node.js) web application designed to empower farmers and agricultural stakeholders by providing soil-specific guidance, interactive globe-based navigation, and region-wise farming recommendations. It combines geospatial interactivity with curated soil data and AI-powered user flow.</p> <p><strong>Key Features:</strong></p> <p><strong>1. Interactive Earth Globe Interface</strong><br> Users can rotate, zoom, and click on any region of the globe to access local soil types. A popup provides real-time guidance with a ‘Learn More’ button that navigates to detailed pages for each soil category.</p> <p><strong>2. Predefined Soil Info Pages</strong><br> Fixed routes like <code>/soil-info/clay</code>, <code>/soil-info/silty</code>, etc., offer curated content on best crops, ideal weather, recommended pesticides, and farming tips tailored to each soil type.</p> <p><strong>3. Country & State Selection with Zoom</strong><br> Dropdown options allow users to select a country and state, upon which the globe zooms into the selected region for deeper contextual engagement.</p> <p><strong>4. Admin Dashboard & Dynamic Posts</strong><br> Role-based admin users can log in and create/update soil-related posts or content dynamically. All changes reflect in real-time on the user interface.</p> <p><strong>5. Authentication & User Management</strong><br> Secure user and admin login with encrypted password handling (bcrypt). Supports role-specific routing and protected access.</p> <p><strong>Tech Stack:</strong></p> <p> Frontend: React.js, Globe.gl, Custom CSS, Earth3D, Three.js<br> Backend: Node.js, Express.js<br> Database: MongoDB Atlas<br> Deployment: Vercel (frontend) + Render (backend)<br> Routing: React Router, RESTful API Integration </p> <p><strong>Data Management:</strong><br> Soil types, admin content, and user data are stored in MongoDB Atlas collections. Dynamic content can be created and displayed via custom admin dashboard modules.</p> <p><strong>Deployment:</strong><br> Frontend deployed via Vercel for optimal UI performance. Backend hosted on Render for handling API requests and admin operations. CORS configured for cross-origin communication between both platforms.</p> <p><strong>Why It Matters:</strong><br> Farmers and agri-entrepreneurs often lack digital access to localized soil intelligence. <em>Soil Farming Agent</em> simplifies this by offering a globe-driven experience that transforms soil data into visual, usable insights—boosting awareness, efficiency, and crop success.</p> <p><strong>Future Enhancements:</strong><br> - Add satellite imagery overlay for selected regions<br> - AI suggestions based on crop and climate data<br> - Add farmer discussion forums<br> - Real-time chatbot to answer farming-related queries<br> - Soil testing report uploads and auto-analysis</p> <a href="https://soil-farming-agent-one.vercel.app/" target="_blank">LETS EXPLORE</a></li></ul></section></div></div>
+      
 
-     <section id="certifications">
+     <div class="container">
+      <div class="form-box"><section id="certifications">
     <h2 class="typing text-4xl font-bold text-black text-center my-4 font-orbitron">Certifications</h2>
 
 
@@ -258,7 +282,7 @@
       <li><a href="https://www.linkedin.com/learning/certificates/4ad360c3844c3de12ef2bc5d69b21df9e67c8131ec3778a5c41c78ef19a5e9ab" target="_blank">Python in Excel – Microsoft</a></li>
       <li><a href="https://www.linkedin.com/learning/certificates/ad00ba61e63f2fd7dbc1aee5ea81bf4f63e82d2ed77a035a6814171fadadcc6e" target="_blank">SQL for Data Engineering – Microsoft</a></li>
     </ul>
-  </section>
+  </section></div></div>
     </div>
   </main>
 
@@ -267,6 +291,136 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 100,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#00d4ff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.8,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.4,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#00d4ff",
+                        "opacity": 0.6,
+                        "width": 1.5
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "repulse"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 400,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 100,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>
+    <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  });
+</script>
+
 </body>
+
 </html>
 

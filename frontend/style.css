@@ -11,15 +11,6 @@
   transition: transform 0.3s ease-out;
 }
 
-#bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-}
 
 .overlay {
   position: fixed;
@@ -28,15 +19,25 @@
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.15); /* Optional: adjust for readability */
-  z-index: -1;
+  z-index: 1;
 }
 
 
 /* Header */
 header {
+  font-family:cursive;
   text-align: center;
   padding: 30px 10px;
-  color: white;
+  color: rgb(255, 255, 255);
+  position: relative;
+  z-index: 1;
+}
+body {
+  font-family:cursive;
+  color: rgb(255, 255, 255);
+  background-color: black;
+  position: relative;
+  z-index: 1;
 }
 
 nav ul {
@@ -52,9 +53,11 @@ nav ul li {
 }
 
 nav ul li a {
-  color: white;
+  color: rgb(255, 255, 255);
   text-decoration: none;
   font-weight: bold;
+  position: relative;
+  z-index: 1;
 }
 
 /* Content Sections */
@@ -69,6 +72,15 @@ section {
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   color: black;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+section.active {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Footer */
@@ -506,4 +518,18 @@ main {
   margin-top: 1.5rem;
   text-align: center;
 }
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  }
+html {
+  scroll-behavior: smooth;
+}
+
+
 
