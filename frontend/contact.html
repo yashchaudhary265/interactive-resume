@@ -6,161 +6,155 @@
   <link rel="icon" type="image/png" href="assets/contact.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="style.css" rel="stylesheet" />
+  <style>
+    body {
+      #particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  }
+      background: #111;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #1a1a1a;
+      padding: 1rem 2rem;
+      text-align: center;
+      border-bottom: 2px solid #00f7ff;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #ffffff;
+    }
+
+    nav {
+      margin-top: 0.5rem;
+    }
+
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 1rem;
+    }
+
+    nav a:hover {
+      color: #00bfff;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .contact-form {
+      background: #222;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 195, 255, 0.3);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .contact-form input[type="file"] {
+      padding: 0.2rem;
+      background: #000;
+    }
+
+    .button-group {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .btn {
+      background: #00eaff;
+      color: #000;
+      padding: 0.7rem 2rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #00ddaa;
+    }
+
   
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-      <div id="particles-js"></div>
-  
+  <div id="particles-js"></div>
   <header>
-    
     <h1 class="fade-in">Send a Message!</h1>
     <nav class="fade-in nav-links">
       <a href="index.html">Home</a> |
       <a href="contact.html">Contact</a>
     </nav>
   </header>
-<section>
-  <div class="form-box bg-white bg-opacity-95 text-black rounded-lg shadow-lg p-6">
-  <section id="contact">
-    <label for="user-name">Your Name</label>
-    <input id="user-name" name="name" placeholder="Enter your name" required type="text" />
-    <div class="glow-line"></div>
 
-    <label for="user-email">Your Email</label>
-    <input id="user-email" name="email" placeholder="Enter your email" required type="email" />
+  <main class="fade-in delayed">
+    <form id="messageForm" class="contact-form" enctype="multipart/form-data">
 
-    <label for="subject">Subject</label>
-    <input id="subject" name="subject" placeholder="Subject" required type="text" />
-    <div class="glow-line"></div>
+      <label for="user-name">Your Name</label>
+      <input type="text" name="name" id="user-name" placeholder="Enter your name" required />
 
-    <label for="message">Your Message</label>
-    <textarea id="message" name="message" placeholder="Write your message here" required rows="6"></textarea>
+      <label for="user-email">Your Email</label>
+      <input type="email" name="email" id="user-email" placeholder="Enter your email" required />
 
-    <label for="attachment">Attach File (optional)</label>
-    <input id="attachment" name="attachment" type="file" />
+      <label for="subject">Subject</label>
+      <input type="text" name="subject" id="subject" placeholder="Subject" required />
 
-    <div class="button-group">
-      <button type="submit" class="btn btn-primary">Send</button>
-    </div>
+      <label for="message">Your Message</label>
+      <textarea name="message" id="message" rows="6" placeholder="Write your message here" required></textarea>
 
-    <div class="glow-line"></div>
-  </section>
-</div>
+      <label for="attachment">Attach File (optional)</label>
+      <input type="file" name="attachment" id="attachment" />
 
-
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </form>
+  </main>
 
   <script src="contact.js"></script>
-  
-  <script src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 100,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#00d4ff"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        },
-                        "polygon": {
-                            "nb_sides": 5
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.8,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0.4,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 5,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 2,
-                            "size_min": 1,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#00d4ff",
-                        "opacity": 0.6,
-                        "width": 1.5
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 2,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": true,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                        }
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "repulse"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 400,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "bubble": {
-                            "distance": 400,
-                            "size": 40,
-                            "duration": 2,
-                            "opacity": 8,
-                            "speed": 3
-                        },
-                        "repulse": {
-                            "distance": 100,
-                            "duration": 0.4
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        },
-                        "remove": {
-                            "particles_nb": 2
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
-        });
-    </script>
 </body>
 </html>
