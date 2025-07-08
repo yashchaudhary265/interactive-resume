@@ -20,7 +20,16 @@
     </nav>
   </header>
 
-  <div class="input-group">
+  <div class="container">
+    <div class="form-box">
+      <section id="contact">
+        <form id="messageForm" enctype="multipart/form-data">
+          <div class="input-group">
+            <label for="user-name">Your Name</label>
+            <input type="text" name="name" id="user-name" placeholder="Enter your name" required />
+          </div>
+
+          <div class="input-group">
             <label for="user-email">Your Email</label>
             <input type="email" name="email" id="user-email" placeholder="Enter your email" required />
           </div>
@@ -47,7 +56,6 @@
       </section>
     </div>
   </div>
-
 
   <script src="contact.js"></script>
   
