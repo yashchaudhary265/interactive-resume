@@ -89,6 +89,73 @@ header {
   50% { border-color: transparent; }
 }
 
+/* Navigation Menu */
+.main-nav {
+  margin: 20px 0;
+  position: relative;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li a {
+  color: #00d4ff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.nav-menu li a:hover {
+  color: #000;
+  background: #00ffcc;
+  border-color: #00ffcc;
+  transform: translateY(-2px);
+}
+
+/* Hamburger Menu (Hidden by default) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 auto 10px;
+  width: 30px;
+  height: 30px;
+  justify-content: space-between;
+}
+
+.nav-toggle span {
+  width: 100%;
+  height: 3px;
+  background: #00d4ff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
 /* Contact Button */
 .contact-btn-container {
   margin: 20px 0;
@@ -1033,6 +1100,47 @@ footer {
   .profile-img {
     width: 150px;
     height: 180px;
+  }
+
+  /* Mobile Navigation */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    flex-direction: column;
+    width: 90%;
+    max-width: 300px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-menu.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-menu li {
+    margin: 5px 0;
+  }
+
+  .nav-menu li a {
+    display: block;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 1rem;
   }
   
   .carousel-nav {
