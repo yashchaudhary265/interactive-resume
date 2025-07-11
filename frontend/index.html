@@ -178,6 +178,7 @@
       position: relative;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 1;
     }
 
     .section-card:hover {
@@ -196,6 +197,7 @@
       height: 100%;
       background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
       transition: left 0.5s ease;
+      z-index: -1;
     }
 
     .section-card:hover::before {
@@ -275,6 +277,7 @@
       box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
       backdrop-filter: blur(20px);
       position: relative;
+      z-index: 2;
     }
 
     /* NEW: Enhanced PDF RAG Section */
@@ -286,6 +289,7 @@
       margin-bottom: 40px;
       position: relative;
       overflow: hidden;
+      z-index: 2;
     }
 
     .pdf-rag-section::before {
@@ -327,6 +331,8 @@
       transition: all 0.3s ease;
       cursor: pointer;
       margin-bottom: 20px;
+      position: relative;
+      z-index: 3;
     }
 
     .pdf-upload-area:hover {
@@ -381,6 +387,8 @@
       border-radius: 15px;
       padding: 25px;
       margin-top: 20px;
+      position: relative;
+      z-index: 2;
     }
 
     .company-details-title {
@@ -399,6 +407,8 @@
       border-radius: 15px;
       padding: 20px;
       margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
     }
 
     .rag-title {
@@ -414,10 +424,11 @@
       font-size: 1.5rem;
     }
 
-    /* FIXED: Input Group and Wrapper */
+    /* FIXED: Input Group and Wrapper - PROPER Z-INDEX AND POSITIONING */
     .input-group {
       margin-bottom: 25px;
       position: relative;
+      z-index: 10;
     }
 
     .input-wrapper {
@@ -426,33 +437,41 @@
       border-radius: 12px;
       background: rgba(0, 0, 0, 0.7);
       transition: all 0.3s ease;
-      overflow: hidden;
+      z-index: 10;
     }
 
     .input-wrapper:focus-within {
       border-color: #00ffcc;
       box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+      z-index: 15;
     }
 
-    /* FIXED: Input and Textarea Styling - Proper Clickable Areas */
+    /* FIXED: Input and Textarea Styling - PROPER CLICKABLE AREAS */
     .input-wrapper input,
     .input-wrapper textarea {
       width: 100%;
       padding: 18px 20px;
-      background: transparent;
+      background: rgba(0, 0, 0, 0.8);
       border: none;
       outline: none;
       color: white;
       font-size: 1rem;
       font-family: 'Orbitron', sans-serif;
       position: relative;
-      z-index: 2;
+      z-index: 12;
       resize: none;
+      cursor: text;
+    }
+
+    .input-wrapper input:focus,
+    .input-wrapper textarea:focus {
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 15;
     }
 
     .input-wrapper input::placeholder,
     .input-wrapper textarea::placeholder {
-      color: transparent;
+      color: rgba(0, 212, 255, 0.5);
     }
 
     .input-wrapper label {
@@ -464,7 +483,7 @@
       transition: all 0.3s ease;
       font-weight: 500;
       font-size: 1rem;
-      z-index: 1;
+      z-index: 11;
       background: transparent;
     }
 
@@ -478,6 +497,7 @@
       background: #0a0a0a;
       padding: 0 8px;
       border-radius: 4px;
+      z-index: 13;
     }
 
     /* Enhanced AI Button */
@@ -496,6 +516,7 @@
       overflow: hidden;
       text-transform: uppercase;
       letter-spacing: 1px;
+      z-index: 10;
     }
 
     .ai-button:hover {
@@ -542,6 +563,7 @@
       transition: all 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 1px;
+      z-index: 10;
     }
 
     .send-button:hover {
@@ -565,6 +587,7 @@
       letter-spacing: 1px;
       width: 100%;
       margin-top: 20px;
+      z-index: 10;
     }
 
     .pdf-send-button:hover {
@@ -577,6 +600,8 @@
       gap: 20px;
       margin-top: 30px;
       justify-content: center;
+      z-index: 10;
+      position: relative;
     }
 
     /* Projects Grid */
@@ -734,8 +759,8 @@
               </div>
               <div class="input-group">
                 <div class="input-wrapper">
-                  <textarea id="extracted-company-details" rows="6" readonly></textarea>
-                  <label>AI will extract and display company information here...</label>
+                  <textarea id="extracted-company-details" rows="6" readonly placeholder="AI will extract and display company information here..."></textarea>
+                  <label>AI Extracted Company Information</label>
                 </div>
               </div>
               
@@ -880,8 +905,8 @@
               </div>
               <div class="input-group">
                 <div class="input-wrapper">
-                  <textarea id="company-description" rows="4"></textarea>
-                  <label>Paste your company description here for AI-tuned messaging...</label>
+                  <textarea id="company-description" rows="4" placeholder="Paste your company description here for AI-tuned messaging..."></textarea>
+                  <label>Company Description for AI Context</label>
                 </div>
               </div>
             </div>
@@ -889,21 +914,21 @@
             <form id="messageForm">
               <div class="input-group">
                 <div class="input-wrapper">
-                  <input type="text" name="name" id="user-name" required />
+                  <input type="text" name="name" id="user-name" required placeholder="Enter your full name" />
                   <label>Your Name</label>
                 </div>
               </div>
               
               <div class="input-group">
                 <div class="input-wrapper">
-                  <input type="email" name="email" id="user-email" required />
+                  <input type="email" name="email" id="user-email" required placeholder="Enter your email address" />
                   <label>Your Email</label>
                 </div>
               </div>
               
               <div class="input-group">
                 <div class="input-wrapper">
-                  <textarea name="message" id="user-message" rows="6" required></textarea>
+                  <textarea name="message" id="user-message" rows="6" required placeholder="Type your message here or use AI to generate one..."></textarea>
                   <label>Your Message</label>
                 </div>
               </div>
@@ -1088,7 +1113,7 @@
     // FIXED: Enhanced AI Button with Proper Message Generation (FROM USER TO YASH)
     const BACKEND_URL = "https://interactive-resume-6shg.onrender.com";
     
-    // FIXED: Input field handlers to properly manage label animations
+    // FIXED: Input field handlers to properly manage label animations and clickability
     function handleInputChange() {
       document.querySelectorAll('.input-wrapper').forEach(wrapper => {
         const input = wrapper.querySelector('input, textarea');
@@ -1102,11 +1127,25 @@
       });
     }
 
-    // Add event listeners to all inputs
-    document.querySelectorAll('.input-wrapper input, .input-wrapper textarea').forEach(input => {
-      input.addEventListener('input', handleInputChange);
-      input.addEventListener('blur', handleInputChange);
-      input.addEventListener('focus', handleInputChange);
+    // FIXED: Add event listeners to all inputs with proper event handling
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.input-wrapper input, .input-wrapper textarea').forEach(input => {
+        // Make sure inputs are clickable and focusable
+        input.style.pointerEvents = 'auto';
+        input.style.cursor = 'text';
+        
+        input.addEventListener('input', handleInputChange);
+        input.addEventListener('blur', handleInputChange);
+        input.addEventListener('focus', handleInputChange);
+        
+        // Ensure input is selectable on click
+        input.addEventListener('click', function() {
+          this.focus();
+        });
+      });
+
+      // Initialize input states
+      handleInputChange();
     });
 
     // FIXED: AI Message Generation (FROM USER TO YASH)
