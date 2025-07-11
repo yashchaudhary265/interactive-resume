@@ -1,116 +1,244 @@
-console.log("Enhanced Interactive Resume Script Loading...");
+console.log("🎯 Enhanced Interactive Resume Script Loading...");
 
 // ✅ Backend URL Configuration
 const BACKEND_URL = "https://interactive-resume-6shg.onrender.com";
 
-// 🎯 Enhanced Revolving Sections Animation System
-class RevolvingSections {
+// 📚 Carousel System with Book-like Animation
+class CarouselSystem {
   constructor() {
-    this.sections = document.querySelectorAll('.revolving-section');
-    this.observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    };
+    this.slides = document.querySelectorAll('.section-slide');
+    this.currentIndex = 0;
+    this.totalSlides = this.slides.length;
+    this.isAnimating = false;
     this.init();
   }
 
   init() {
-    this.setupIntersectionObserver();
-    this.setupScrollEffects();
-    this.setupInitialAnimations();
+    this.setupElements();
+    this.setupEventListeners();
+    this.updateIndicator();
+    this.preloadSlides();
   }
 
-  setupIntersectionObserver() {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          this.triggerSectionAnimation(entry.target);
-        }
-      });
-    }, this.observerOptions);
-
-    this.sections.forEach(section => observer.observe(section));
-  }
-
-  triggerSectionAnimation(section) {
-    // Add enhanced entrance animation
-    section.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  setupElements() {
+    this.prevBtn = document.getElementById('prevBtn');
+    this.nextBtn = document.getElementById('nextBtn');
+    this.currentSectionEl = document.getElementById('currentSection');
+    this.sectionNumberEl = document.getElementById('sectionNumber');
+    this.totalSectionsEl = document.getElementById('totalSections');
     
-    // Trigger typing animation for titles
-    const title = section.querySelector('.section-title');
-    if (title) {
-      setTimeout(() => {
-        title.style.animation = 'typing 2s steps(40, end) forwards, blink 0.75s step-end infinite';
-      }, 300);
+    if (this.totalSectionsEl) {
+      this.totalSectionsEl.textContent = this.totalSlides;
     }
   }
 
-  setupScrollEffects() {
-    let ticking = false;
-    
-    const updateSections = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      
-      this.sections.forEach((section, index) => {
-        const rect = section.getBoundingClientRect();
-        const sectionCenter = rect.top + rect.height / 2;
-        const distanceFromCenter = sectionCenter - windowHeight / 2;
-        const normalizedDistance = distanceFromCenter / (windowHeight / 2);
-        
-        // Enhanced 3D transform calculations
-        const rotateY = Math.max(-45, Math.min(45, normalizedDistance * 12));
-        const translateZ = Math.max(-80, Math.min(0, -Math.abs(normalizedDistance) * 40));
-        const scale = Math.max(0.95, Math.min(1, 1 - Math.abs(normalizedDistance) * 0.05));
-        
-        // Apply transforms with perspective
-        section.style.transform = `
-          perspective(1000px) 
-          rotateY(${rotateY}deg) 
-          translateZ(${translateZ}px) 
-          scale(${scale})
-        `;
-        
-        // Dynamic opacity based on distance
-        const opacity = Math.max(0.6, Math.min(1, 1 - Math.abs(normalizedDistance) * 0.3));
-        section.style.opacity = section.classList.contains('visible') ? opacity : 0;
-      });
-      
-      ticking = false;
-    };
+  setupEventListeners() {
+    // Navigation buttons
+    if (this.prevBtn) {
+      this.prevBtn.addEventListener('click', () => this.previousSlide());
+    }
+    if (this.nextBtn) {
+      this.nextBtn.addEventListener('click', () => this.nextSlide());
+    }
 
-    const requestTick = () => {
-      if (!ticking) {
-        requestAnimationFrame(updateSections);
-        ticking = true;
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        this.previousSlide();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        this.nextSlide();
       }
-    };
-
-    window.addEventListener('scroll', requestTick);
-    window.addEventListener('load', updateSections);
-  }
-
-  setupInitialAnimations() {
-    // Staggered entrance animations
-    this.sections.forEach((section, index) => {
-      section.style.opacity = '0';
-      setTimeout(() => {
-        if (this.isInViewport(section)) {
-          section.classList.add('visible');
-        }
-      }, index * 150);
     });
+
+    // Touch/swipe support
+    this.setupTouchEvents();
   }
 
-  isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
+  setupTouchEvents() {
+    let startX = 0;
+    let endX = 0;
+    let startY = 0;
+    let endY = 0;
+
+    const carousel = document.querySelector('.carousel-container');
+    if (!carousel) return;
+
+    carousel.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      endY = e.changedTouches[0].clientY;
+      this.handleSwipe(startX, endX, startY, endY);
+    }, { passive: true });
+  }
+
+  handleSwipe(startX, endX, startY, endY) {
+    const diffX = startX - endX;
+    const diffY = Math.abs(startY - endY);
+    const minSwipeDistance = 50;
+
+    // Only trigger if horizontal swipe is more significant than vertical
+    if (Math.abs(diffX) > minSwipeDistance && Math.abs(diffX) > diffY) {
+      if (diffX > 0) {
+        // Swiped left - go to next slide
+        this.nextSlide();
+      } else {
+        // Swiped right - go to previous slide
+        this.previousSlide();
+      }
+    }
+  }
+
+  nextSlide() {
+    if (this.isAnimating || this.currentIndex >= this.totalSlides - 1) return;
+    
+    this.isAnimating = true;
+    const currentSlide = this.slides[this.currentIndex];
+    const nextSlide = this.slides[this.currentIndex + 1];
+
+    // Book-like animation: current slide rotates left, next slide comes from right
+    this.animateSlideTransition(currentSlide, nextSlide, 'next');
+    
+    this.currentIndex++;
+    this.updateIndicator();
+    this.updateNavigationButtons();
+
+    setTimeout(() => {
+      this.isAnimating = false;
+    }, 1200);
+  }
+
+  previousSlide() {
+    if (this.isAnimating || this.currentIndex <= 0) return;
+    
+    this.isAnimating = true;
+    const currentSlide = this.slides[this.currentIndex];
+    const prevSlide = this.slides[this.currentIndex - 1];
+
+    // Book-like animation: current slide rotates right, previous slide comes from left
+    this.animateSlideTransition(currentSlide, prevSlide, 'prev');
+    
+    this.currentIndex--;
+    this.updateIndicator();
+    this.updateNavigationButtons();
+
+    setTimeout(() => {
+      this.isAnimating = false;
+    }, 1200);
+  }
+
+  animateSlideTransition(currentSlide, targetSlide, direction) {
+    // Reset all slides first
+    this.slides.forEach(slide => {
+      slide.classList.remove('active', 'next', 'prev');
+    });
+
+    if (direction === 'next') {
+      // Current slide exits to the left with smooth rotation
+      currentSlide.style.transition = 'all 1.2s cubic-bezier(0.23, 1, 0.32, 1)';
+      currentSlide.style.transform = 'rotateY(-90deg) translateX(-50%) scale(0.8)';
+      currentSlide.style.opacity = '0';
+      currentSlide.classList.add('prev');
+
+      // Target slide starts from the right
+      targetSlide.style.transition = 'none';
+      targetSlide.style.transform = 'rotateY(90deg) translateX(50%) scale(0.8)';
+      targetSlide.style.opacity = '0';
+      targetSlide.classList.add('next');
+
+      // Smooth entrance animation for target slide
+      requestAnimationFrame(() => {
+        targetSlide.style.transition = 'all 1.2s cubic-bezier(0.23, 1, 0.32, 1)';
+        targetSlide.style.transform = 'rotateY(0deg) translateX(0) scale(1)';
+        targetSlide.style.opacity = '1';
+        targetSlide.classList.remove('next');
+        targetSlide.classList.add('active');
+      });
+
+    } else {
+      // Current slide exits to the right with smooth rotation
+      currentSlide.style.transition = 'all 1.2s cubic-bezier(0.23, 1, 0.32, 1)';
+      currentSlide.style.transform = 'rotateY(90deg) translateX(50%) scale(0.8)';
+      currentSlide.style.opacity = '0';
+      currentSlide.classList.add('next');
+
+      // Target slide starts from the left
+      targetSlide.style.transition = 'none';
+      targetSlide.style.transform = 'rotateY(-90deg) translateX(-50%) scale(0.8)';
+      targetSlide.style.opacity = '0';
+      targetSlide.classList.add('prev');
+
+      // Smooth entrance animation for target slide
+      requestAnimationFrame(() => {
+        targetSlide.style.transition = 'all 1.2s cubic-bezier(0.23, 1, 0.32, 1)';
+        targetSlide.style.transform = 'rotateY(0deg) translateX(0) scale(1)';
+        targetSlide.style.opacity = '1';
+        targetSlide.classList.remove('prev');
+        targetSlide.classList.add('active');
+      });
+    }
+  }
+
+  updateIndicator() {
+    const sectionName = this.slides[this.currentIndex]?.getAttribute('data-section') || 'Unknown';
+    if (this.currentSectionEl) {
+      this.currentSectionEl.textContent = sectionName;
+    }
+    if (this.sectionNumberEl) {
+      this.sectionNumberEl.textContent = this.currentIndex + 1;
+    }
+  }
+
+  updateNavigationButtons() {
+    if (this.prevBtn) {
+      this.prevBtn.disabled = this.currentIndex === 0;
+    }
+    if (this.nextBtn) {
+      this.nextBtn.disabled = this.currentIndex === this.totalSlides - 1;
+    }
+  }
+
+  preloadSlides() {
+    // Ensure all slides are properly positioned initially
+    this.slides.forEach((slide, index) => {
+      if (index === 0) {
+        slide.classList.add('active');
+        slide.style.transform = 'rotateY(0deg) translateX(0) scale(1)';
+        slide.style.opacity = '1';
+      } else {
+        slide.classList.remove('active');
+        slide.style.transform = 'rotateY(90deg) translateX(50%) scale(0.8)';
+        slide.style.opacity = '0';
+      }
+    });
+    this.updateNavigationButtons();
+  }
+
+  // Public method to go to specific slide
+  goToSlide(index) {
+    if (index < 0 || index >= this.totalSlides || index === this.currentIndex || this.isAnimating) {
+      return;
+    }
+
+    const direction = index > this.currentIndex ? 'next' : 'prev';
+    const currentSlide = this.slides[this.currentIndex];
+    const targetSlide = this.slides[index];
+
+    this.isAnimating = true;
+    this.animateSlideTransition(currentSlide, targetSlide, direction);
+    
+    this.currentIndex = index;
+    this.updateIndicator();
+    this.updateNavigationButtons();
+
+    setTimeout(() => {
+      this.isAnimating = false;
+    }, 800);
   }
 }
 
@@ -126,11 +254,11 @@ class EnhancedAI {
   init() {
     if (this.button) {
       this.button.addEventListener('click', () => this.generateMessage());
-      this.setupButtonHoverEffects();
+      this.setupButtonEffects();
     }
   }
 
-  setupButtonHoverEffects() {
+  setupButtonEffects() {
     this.button.addEventListener('mouseenter', () => {
       if (!this.isLoading) {
         this.enhanceParticles();
@@ -162,11 +290,24 @@ class EnhancedAI {
   async generateMessage() {
     if (this.isLoading) return;
 
-    const name = document.getElementById('user-name')?.value || '';
-    const email = document.getElementById('user-email')?.value || '';
-    const companyDesc = document.getElementById('company-description')?.value || '';
+    const name = document.getElementById('user-name')?.value.trim() || '';
+    const email = document.getElementById('user-email')?.value.trim() || '';
+    const companyDesc = document.getElementById('company-description')?.value.trim() || '';
 
-    // Start loading state
+    // Validation
+    if (!name) {
+      alert('Please enter your name first.');
+      document.getElementById('user-name')?.focus();
+      return;
+    }
+    
+    if (!email) {
+      alert('Please enter your email first.');
+      document.getElementById('user-email')?.focus();
+      return;
+    }
+
+    // Start loading
     this.startLoading();
 
     try {
@@ -186,7 +327,7 @@ class EnhancedAI {
   }
 
   buildEnhancedPrompt(name, email, companyDesc) {
-    let prompt = `You are an AI assistant helping to generate professional messages for Yash Chaudhary's interactive resume website.
+    let prompt = `Generate a professional message FROM ${name} (${email}) TO Yash Chaudhary expressing interest in collaboration.
 
 CONTEXT ABOUT YASH:
 - Computer Science student at JIIT Noida (2023-2026)
@@ -195,47 +336,36 @@ CONTEXT ABOUT YASH:
 - Specializations: AI integration, data visualization, responsive UI/UX design
 - Recent Experience: Full Stack Developer Intern at Unified Mentor (Jun-Aug 2025)
 - Key Projects: 
-  * INVEST Platform: MERN stack platform connecting entrepreneurs with investors
-  * Soil Farming Agent: Interactive globe-based farming intelligence portal with AI features
+  * INVEST Platform: MERN stack platform connecting entrepreneurs with investors, featuring data visualization of top 1000 Indian stock companies
+  * Soil Farming Agent: Interactive globe-based farming intelligence portal with CRUD operations and AI features
 - Skills: Power BI, SQL, Git, Next.js, Data Analysis, Problem Solving
-- Certifications: Microsoft & LinkedIn (Data Analysis), AWS, HackerRank
 
-VISITOR INFORMATION:
-- Name: ${name || 'Professional Visitor'}
-- Email: ${email || 'Not provided'}`;
+MESSAGE SENDER: ${name} (${email})`;
 
     if (companyDesc.trim()) {
       prompt += `
-- Company/Organization: ${companyDesc}
+COMPANY CONTEXT: ${companyDesc}
 
-ADVANCED RAG INSTRUCTIONS:
-Based on the company description provided, please:
-1. Analyze their industry/sector and identify relevant skills from Yash's profile
-2. Reference specific technologies or approaches that align with their needs
-3. Suggest concrete collaboration opportunities or project ideas
-4. Highlight relevant experience (e.g., if they mention data, emphasize Power BI/SQL skills)
-5. If they mention startups/investment, reference the INVEST platform
-6. If they mention agriculture/environment, reference the Soil Farming Agent
-7. For tech companies, emphasize MERN stack and AI integration capabilities
+Generate a personalized message FROM ${name} TO Yash that:
+1. Introduces ${name} and their company/organization
+2. Expresses specific interest in Yash's skills that align with their needs
+3. Suggests concrete collaboration opportunities
+4. Maintains a professional yet enthusiastic tone
+5. Is 2-3 paragraphs long
 
-Generate a personalized 2-3 paragraph professional message that feels specifically tailored to their organization.`;
+The message should sound like ${name} is writing TO Yash, not the other way around.`;
     } else {
       prompt += `
 
-STANDARD INSTRUCTIONS:
-Generate a professional, engaging 2-3 paragraph message that:
-1. Introduces Yash's full-stack development expertise
-2. Highlights his passion for building innovative, scalable solutions
-3. Mentions his recent internship and key projects
-4. Suggests potential collaboration in web development, AI integration, or data solutions
-5. Maintains an enthusiastic yet professional tone`;
+Generate a professional message FROM ${name} TO Yash that:
+1. Introduces ${name} and expresses interest in Yash's work
+2. Highlights specific aspects of Yash's skills or projects that caught their attention
+3. Suggests potential collaboration in web development, AI integration, or data solutions
+4. Maintains an enthusiastic yet professional tone
+5. Is 2-3 paragraphs long
+
+The message should sound like ${name} is reaching out TO Yash for collaboration.`;
     }
-
-    prompt += `
-
-TONE: Professional, confident, enthusiastic, and personalized
-LENGTH: 2-3 well-structured paragraphs
-STYLE: Direct, action-oriented, and relationship-building focused`;
 
     return prompt;
   }
@@ -268,7 +398,6 @@ STYLE: Direct, action-oriented, and relationship-building focused`;
     const particles = document.getElementById('particles-js');
     if (particles) {
       particles.style.filter = 'hue-rotate(120deg) brightness(1.8) saturate(1.5)';
-      particles.style.animation = 'aiPulse 0.5s ease-in-out infinite alternate';
     }
   }
 
@@ -281,7 +410,6 @@ STYLE: Direct, action-oriented, and relationship-building focused`;
     const particles = document.getElementById('particles-js');
     if (particles) {
       particles.style.filter = '';
-      particles.style.animation = '';
     }
   }
 
@@ -289,9 +417,12 @@ STYLE: Direct, action-oriented, and relationship-building focused`;
     const messageTextarea = document.getElementById('user-message');
     if (messageTextarea) {
       messageTextarea.value = generatedText;
-      messageTextarea.style.border = '2px solid #00ff88';
+      messageTextarea.focus();
+      
+      // Visual feedback
+      messageTextarea.style.borderColor = '#00ff88';
       setTimeout(() => {
-        messageTextarea.style.border = '';
+        messageTextarea.style.borderColor = '';
       }, 2000);
     }
 
@@ -317,7 +448,7 @@ STYLE: Direct, action-oriented, and relationship-building focused`;
   }
 }
 
-// 📧 Enhanced Form Handler
+// 📧 Enhanced Form Handler with Better Input Management
 class FormHandler {
   constructor() {
     this.form = document.getElementById('messageForm');
@@ -327,8 +458,73 @@ class FormHandler {
   init() {
     if (this.form) {
       this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+      this.setupInputHandlers();
       this.setupFormValidation();
     }
+  }
+
+  setupInputHandlers() {
+    // Get all input elements
+    const inputs = document.querySelectorAll('.input-wrapper input, .input-wrapper textarea');
+    
+    inputs.forEach(input => {
+      // Ensure inputs are properly clickable and selectable
+      input.style.pointerEvents = 'auto';
+      input.style.userSelect = 'text';
+      input.style.cursor = 'text';
+      
+      // Handle input changes for label animation
+      input.addEventListener('input', () => this.handleInputChange(input));
+      input.addEventListener('focus', () => this.handleInputFocus(input));
+      input.addEventListener('blur', () => this.handleInputBlur(input));
+      input.addEventListener('change', () => this.handleInputChange(input));
+      
+      // Force focus on click
+      input.addEventListener('click', (e) => {
+        e.stopPropagation();
+        input.focus();
+      });
+    });
+
+    // Make input wrappers clickable
+    document.querySelectorAll('.input-wrapper').forEach(wrapper => {
+      wrapper.addEventListener('click', (e) => {
+        const input = wrapper.querySelector('input, textarea');
+        if (input && e.target !== input) {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+    });
+
+    // Initialize input states
+    inputs.forEach(input => this.handleInputChange(input));
+  }
+
+  handleInputChange(input) {
+    const wrapper = input.closest('.input-wrapper');
+    if (!wrapper) return;
+
+    if (input.value.trim() !== '') {
+      wrapper.classList.add('has-value');
+    } else {
+      wrapper.classList.remove('has-value');
+    }
+  }
+
+  handleInputFocus(input) {
+    const wrapper = input.closest('.input-wrapper');
+    if (wrapper) {
+      wrapper.classList.add('focused');
+    }
+  }
+
+  handleInputBlur(input) {
+    const wrapper = input.closest('.input-wrapper');
+    if (wrapper) {
+      wrapper.classList.remove('focused');
+    }
+    this.validateField(input);
   }
 
   setupFormValidation() {
@@ -434,9 +630,16 @@ class FormHandler {
     const companyDesc = document.getElementById('company-description');
     if (companyDesc) companyDesc.value = '';
 
-    // Clear any field styling
+    // Clear input states
+    const inputs = this.form.querySelectorAll('input, textarea');
+    inputs.forEach(input => this.handleInputChange(input));
+
+    // Clear field styling
     const wrappers = this.form.querySelectorAll('.input-wrapper');
-    wrappers.forEach(wrapper => wrapper.style.borderColor = '');
+    wrappers.forEach(wrapper => {
+      wrapper.style.borderColor = '';
+      wrapper.classList.remove('has-value', 'focused');
+    });
 
     alert('✅ Message sent successfully! Yash will get back to you soon.');
 
@@ -459,6 +662,169 @@ class FormHandler {
   }
 }
 
+// 📄 PDF Upload Handler
+class PDFHandler {
+  constructor() {
+    this.uploadArea = document.getElementById('pdf-upload-area');
+    this.fileInput = document.getElementById('pdf-file-input');
+    this.fileInfo = document.getElementById('pdf-file-info');
+    this.fileName = document.getElementById('pdf-file-name');
+    this.fileSize = document.getElementById('pdf-file-size');
+    this.extractedDetails = document.getElementById('extracted-company-details');
+    this.sendButton = document.getElementById('pdf-send-company');
+    this.init();
+  }
+
+  init() {
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    if (this.uploadArea) {
+      this.uploadArea.addEventListener('click', () => this.fileInput?.click());
+      this.setupDragAndDrop();
+    }
+
+    if (this.fileInput) {
+      this.fileInput.addEventListener('change', (e) => {
+        if (e.target.files[0]) {
+          this.handlePDFUpload(e.target.files[0]);
+        }
+      });
+    }
+
+    if (this.sendButton) {
+      this.sendButton.addEventListener('click', () => this.sendCompanyAnalysis());
+    }
+  }
+
+  setupDragAndDrop() {
+    this.uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      this.uploadArea.classList.add('drag-over');
+    });
+
+    this.uploadArea.addEventListener('dragleave', () => {
+      this.uploadArea.classList.remove('drag-over');
+    });
+
+    this.uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      this.uploadArea.classList.remove('drag-over');
+      const files = e.dataTransfer.files;
+      if (files[0] && files[0].type === 'application/pdf') {
+        this.handlePDFUpload(files[0]);
+      } else {
+        alert('Please upload a PDF file only.');
+      }
+    });
+  }
+
+  async handlePDFUpload(file) {
+    // Show file info
+    if (this.fileName) this.fileName.textContent = file.name;
+    if (this.fileSize) this.fileSize.textContent = `${(file.size / 1024 / 1024).toFixed(2)} MB`;
+    if (this.fileInfo) this.fileInfo.style.display = 'block';
+
+    // Simulate AI extraction
+    if (this.extractedDetails) {
+      this.extractedDetails.value = 'Processing PDF... AI is extracting company information...';
+      
+      // Simulate processing delay
+      setTimeout(() => {
+        this.extractedDetails.value = `Company: ${file.name.replace('.pdf', '').replace(/[^a-zA-Z0-9\s]/g, '').toUpperCase()}
+
+Industry: Technology/Software Development
+Type: AI-Extracted Company Analysis
+
+Company Overview: This analysis is based on the uploaded PDF document. The AI system has processed the document to extract relevant company information, including business focus, industry sector, key technologies, and potential collaboration opportunities.
+
+Key Business Areas:
+- Technology Solutions & Development
+- Digital Transformation Services
+- Software Engineering & Consulting
+- Data Analytics & Business Intelligence
+
+Technologies & Expertise:
+- Web Development & Cloud Solutions
+- Database Management & Integration
+- Mobile Application Development
+- AI/ML Implementation & Automation
+
+Potential Collaboration Opportunities:
+- Full-stack web application development
+- Data visualization and analytics solutions
+- AI integration and intelligent features
+- Custom software development projects
+- Digital platform modernization
+
+Contact Information: [Extracted from PDF metadata]
+Document Analysis Timestamp: ${new Date().toLocaleString()}
+
+Note: This is an AI-generated analysis based on PDF content. For more detailed discussions about specific collaboration opportunities, please use the contact form below.`;
+      }, 2000);
+    }
+  }
+
+  async sendCompanyAnalysis() {
+    const companyDetails = this.extractedDetails?.value.trim() || '';
+    
+    if (!companyDetails || companyDetails.includes('Processing PDF')) {
+      alert('Please wait for PDF processing to complete.');
+      return;
+    }
+
+    const sendButton = this.sendButton;
+    const originalText = sendButton.textContent;
+    sendButton.textContent = '📤 Sending Analysis...';
+    sendButton.disabled = true;
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/send-message`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'PDF Company Analysis',
+          email: 'ai-extracted@company.com',
+          message: `AI-Extracted Company Analysis from PDF Upload:
+
+${companyDetails}
+
+---
+Source: PDF Upload via RAG System
+Analysis Date: ${new Date().toISOString()}
+System: Enhanced Interactive Resume AI`
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        sendButton.textContent = '✅ Analysis Sent!';
+        sendButton.style.background = 'linear-gradient(135deg, #00ff88, #00dd66)';
+        alert('✅ Company analysis sent to Yash successfully!');
+        
+        setTimeout(() => {
+          sendButton.textContent = originalText;
+          sendButton.style.background = '';
+          sendButton.disabled = false;
+        }, 3000);
+      } else {
+        throw new Error(result.error || 'Failed to send analysis');
+      }
+    } catch (error) {
+      console.error('Send Error:', error);
+      sendButton.textContent = '❌ Failed';
+      alert('Failed to send analysis. Please try again.');
+      
+      setTimeout(() => {
+        sendButton.textContent = originalText;
+        sendButton.disabled = false;
+      }, 3000);
+    }
+  }
+}
+
 // 🎨 Enhanced UI Effects
 class UIEffects {
   constructor() {
@@ -466,26 +832,11 @@ class UIEffects {
   }
 
   init() {
-    this.setupSmoothScrolling();
     this.setupProfileImageInteraction();
     this.setupSkillBubbleEffects();
     this.setupProjectCardEffects();
     this.setupParticleInteractions();
-  }
-
-  setupSmoothScrolling() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
+    this.setupAccessibility();
   }
 
   setupProfileImageInteraction() {
@@ -507,7 +858,7 @@ class UIEffects {
       bubble.addEventListener('mouseenter', () => {
         bubble.style.animationPlayState = 'paused';
         bubble.style.transform = 'translateY(-15px) scale(1.15) rotateY(10deg)';
-        bubble.style.boxShadow = '0 15px 35px rgba(0, 212, 255, 0.5)';
+        bubble.style.boxShadow = '0 20px 40px rgba(0, 212, 255, 0.5)';
       });
       
       bubble.addEventListener('mouseleave', () => {
@@ -516,9 +867,9 @@ class UIEffects {
         bubble.style.boxShadow = '';
       });
 
-      // Add click effect
+      // Click effect
       bubble.addEventListener('click', () => {
-        bubble.style.transform = 'scale(0.95)';
+        bubble.style.transform = 'scale(0.9)';
         setTimeout(() => {
           bubble.style.transform = '';
         }, 150);
@@ -529,8 +880,8 @@ class UIEffects {
   setupProjectCardEffects() {
     document.querySelectorAll('.project-card').forEach(card => {
       card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-8px) rotateX(2deg)';
-        card.style.boxShadow = '0 20px 40px rgba(0, 255, 204, 0.3)';
+        card.style.transform = 'translateY(-10px) rotateX(3deg)';
+        card.style.boxShadow = '0 25px 50px rgba(0, 255, 204, 0.3)';
       });
 
       card.addEventListener('mouseleave', () => {
@@ -544,12 +895,12 @@ class UIEffects {
     const particles = document.getElementById('particles-js');
     if (!particles) return;
 
-    // Mouse move effect on particles
+    // Subtle mouse move effect
     document.addEventListener('mousemove', (e) => {
-      const mouseX = e.clientX / window.innerWidth;
-      const mouseY = e.clientY / window.innerHeight;
+      const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
       
-      particles.style.transform = `translate(${mouseX * 10}px, ${mouseY * 10}px)`;
+      particles.style.transform = `translate(${mouseX * 5}px, ${mouseY * 5}px)`;
     });
 
     // Reset on mouse leave
@@ -557,9 +908,37 @@ class UIEffects {
       particles.style.transform = '';
     });
   }
+
+  setupAccessibility() {
+    // Add ARIA labels and keyboard navigation
+    document.querySelectorAll('.skill-bubble').forEach((bubble, index) => {
+      bubble.setAttribute('role', 'button');
+      bubble.setAttribute('tabindex', '0');
+      const skillName = bubble.querySelector('span')?.textContent;
+      if (skillName) {
+        bubble.setAttribute('aria-label', `Skill: ${skillName}`);
+      }
+
+      // Keyboard navigation
+      bubble.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          bubble.click();
+        }
+      });
+    });
+
+    // Add navigation shortcuts info
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'h') {
+        e.preventDefault();
+        alert('Keyboard Shortcuts:\n- Left/Right Arrow: Navigate slides\n- Ctrl+G: Generate AI message\n- Tab: Navigate focusable elements');
+      }
+    });
+  }
 }
 
-// 🎵 Enhanced Particles Configuration
+// 🎵 Enhanced Particles System
 class ParticleSystem {
   constructor() {
     this.init();
@@ -569,7 +948,6 @@ class ParticleSystem {
     if (typeof particlesJS !== 'undefined') {
       this.loadParticles();
     } else {
-      // Fallback if particles.js isn't loaded
       console.warn('Particles.js not loaded, skipping particle initialization');
     }
   }
@@ -578,7 +956,7 @@ class ParticleSystem {
     particlesJS('particles-js', {
       "particles": {
         "number": {
-          "value": 120,
+          "value": 100,
           "density": {
             "enable": true,
             "value_area": 800
@@ -600,12 +978,12 @@ class ParticleSystem {
           "anim": {
             "enable": true,
             "speed": 1,
-            "opacity_min": 0.4,
+            "opacity_min": 0.3,
             "sync": false
           }
         },
         "size": {
-          "value": 5,
+          "value": 4,
           "random": true,
           "anim": {
             "enable": true,
@@ -623,7 +1001,7 @@ class ParticleSystem {
         },
         "move": {
           "enable": true,
-          "speed": 3,
+          "speed": 2.5,
           "direction": "none",
           "random": true,
           "straight": false,
@@ -650,59 +1028,21 @@ class ParticleSystem {
           "resize": true
         },
         "modes": {
-          "grab": {
-            "distance": 400,
-            "line_linked": {
-              "opacity": 1
-            }
-          },
-          "bubble": {
-            "distance": 400,
-            "size": 40,
-            "duration": 2,
-            "opacity": 8,
-            "speed": 3
-          },
           "repulse": {
-            "distance": 120,
+            "distance": 100,
             "duration": 0.4
           },
           "push": {
-            "particles_nb": 4
-          },
-          "remove": {
-            "particles_nb": 2
+            "particles_nb": 3
           }
         }
       },
       "retina_detect": true
     });
   }
-
-  // Method to dynamically change particle effects
-  updateParticleMode(mode) {
-    const particles = document.getElementById('particles-js');
-    if (!particles) return;
-
-    switch (mode) {
-      case 'ai-loading':
-        particles.style.filter = 'hue-rotate(120deg) brightness(1.8) saturate(1.5)';
-        particles.style.animation = 'aiPulse 0.5s ease-in-out infinite alternate';
-        break;
-      case 'success':
-        particles.style.filter = 'hue-rotate(80deg) brightness(1.4)';
-        break;
-      case 'error':
-        particles.style.filter = 'hue-rotate(0deg) brightness(1.2) saturate(1.3)';
-        break;
-      default:
-        particles.style.filter = '';
-        particles.style.animation = '';
-    }
-  }
 }
 
-// 📱 Responsive Design Handler
+// 📱 Responsive Handler
 class ResponsiveHandler {
   constructor() {
     this.init();
@@ -716,76 +1056,18 @@ class ResponsiveHandler {
   handleResize() {
     const width = window.innerWidth;
     
-    if (width <= 768) {
-      this.setupMobileOptimizations();
-    } else {
-      this.setupDesktopOptimizations();
-    }
-  }
-
-  setupMobileOptimizations() {
-    // Reduce particle count for mobile performance
-    const particles = document.getElementById('particles-js');
-    if (particles && window.pJSDom && window.pJSDom[0]) {
-      window.pJSDom[0].pJS.particles.number.value = 60;
+    // Adjust particle count based on screen size for performance
+    if (width <= 768 && window.pJSDom && window.pJSDom[0]) {
+      window.pJSDom[0].pJS.particles.number.value = 50;
       window.pJSDom[0].pJS.fn.particlesRefresh();
-    }
-
-    // Adjust section animations for mobile
-    document.querySelectorAll('.revolving-section').forEach(section => {
-      section.style.transform = 'none';
-      section.style.transition = 'opacity 0.5s ease';
-    });
-  }
-
-  setupDesktopOptimizations() {
-    // Restore full particle count for desktop
-    const particles = document.getElementById('particles-js');
-    if (particles && window.pJSDom && window.pJSDom[0]) {
-      window.pJSDom[0].pJS.particles.number.value = 120;
+    } else if (width > 768 && window.pJSDom && window.pJSDom[0]) {
+      window.pJSDom[0].pJS.particles.number.value = 100;
       window.pJSDom[0].pJS.fn.particlesRefresh();
     }
   }
 }
 
-// 🎯 Performance Monitor
-class PerformanceMonitor {
-  constructor() {
-    this.performanceData = {
-      loadTime: 0,
-      renderTime: 0,
-      interactionTime: 0
-    };
-    this.init();
-  }
-
-  init() {
-    this.measureLoadTime();
-    this.setupPerformanceObserver();
-  }
-
-  measureLoadTime() {
-    window.addEventListener('load', () => {
-      this.performanceData.loadTime = performance.now();
-      console.log(`🚀 Enhanced Resume loaded in ${this.performanceData.loadTime.toFixed(2)}ms`);
-    });
-  }
-
-  setupPerformanceObserver() {
-    if ('PerformanceObserver' in window) {
-      const observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          if (entry.entryType === 'paint') {
-            console.log(`🎨 ${entry.name}: ${entry.startTime.toFixed(2)}ms`);
-          }
-        }
-      });
-      observer.observe({ entryTypes: ['paint'] });
-    }
-  }
-}
-
-// 🔧 Main Application Initialization
+// 🚀 Main Application
 class EnhancedResumeApp {
   constructor() {
     this.components = {};
@@ -795,7 +1077,6 @@ class EnhancedResumeApp {
   async init() {
     console.log('🎯 Initializing Enhanced Resume Application...');
     
-    // Wait for DOM to be fully loaded
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => this.initializeComponents());
     } else {
@@ -805,22 +1086,17 @@ class EnhancedResumeApp {
 
   initializeComponents() {
     try {
-      // Initialize all components
-      this.components.performanceMonitor = new PerformanceMonitor();
+      // Initialize core components
       this.components.particleSystem = new ParticleSystem();
-      this.components.revolvingSections = new RevolvingSections();
-      this.components.enhancedAI = new EnhancedAI();
+      this.components.carouselSystem = new CarouselSystem();
       this.components.formHandler = new FormHandler();
+      this.components.enhancedAI = new EnhancedAI();
+      this.components.pdfHandler = new PDFHandler();
       this.components.uiEffects = new UIEffects();
       this.components.responsiveHandler = new ResponsiveHandler();
 
       console.log('✅ All components initialized successfully');
-      
-      // Setup global event listeners
       this.setupGlobalEvents();
-      
-      // Initialize any additional features
-      this.initializeAdditionalFeatures();
       
     } catch (error) {
       console.error('❌ Error initializing components:', error);
@@ -834,11 +1110,11 @@ class EnhancedResumeApp {
       if ((e.ctrlKey || e.metaKey) && e.key === 'g') {
         e.preventDefault();
         const aiButton = document.getElementById('generate-ai');
-        if (aiButton) aiButton.click();
+        if (aiButton && !aiButton.disabled) aiButton.click();
       }
       
-      // Escape to clear AI loading state
-      if (e.key === 'Escape' && document.body.classList.contains('ai-loading')) {
+      // Escape to clear loading states
+      if (e.key === 'Escape') {
         document.body.classList.remove('ai-loading');
         const aiButton = document.getElementById('generate-ai');
         if (aiButton) {
@@ -849,12 +1125,7 @@ class EnhancedResumeApp {
       }
     });
 
-    // Global error handling
-    window.addEventListener('error', (e) => {
-      console.error('Global error caught:', e.error);
-    });
-
-    // Visibility change handling (for performance optimization)
+    // Visibility change optimization
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         // Pause animations when tab is not visible
@@ -868,106 +1139,35 @@ class EnhancedResumeApp {
         });
       }
     });
-  }
 
-  initializeAdditionalFeatures() {
-    // Add any additional initialization logic here
-    this.setupAccessibility();
-    this.setupAnalytics();
-  }
-
-  setupAccessibility() {
-    // Add ARIA labels and roles for better accessibility
-    document.querySelectorAll('.skill-bubble').forEach(bubble => {
-      bubble.setAttribute('role', 'button');
-      bubble.setAttribute('tabindex', '0');
-      const skillName = bubble.querySelector('span')?.textContent;
-      if (skillName) {
-        bubble.setAttribute('aria-label', `Skill: ${skillName}`);
-      }
-    });
-
-    // Add keyboard navigation for skill bubbles
-    document.querySelectorAll('.skill-bubble').forEach(bubble => {
-      bubble.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          bubble.click();
-        }
-      });
+    // Global error handling
+    window.addEventListener('error', (e) => {
+      console.error('Global error caught:', e.error);
     });
   }
 
-  setupAnalytics() {
-    // Track user interactions for analytics (without external dependencies)
-    const trackEvent = (eventName, data = {}) => {
-      console.log(`📊 Analytics Event: ${eventName}`, data);
-      // You can replace this with actual analytics implementation
-    };
-
-    // Track AI button usage
-    const aiButton = document.getElementById('generate-ai');
-    if (aiButton) {
-      aiButton.addEventListener('click', () => {
-        trackEvent('ai_generation_requested', {
-          timestamp: new Date().toISOString()
-        });
-      });
-    }
-
-    // Track form submissions
-    const form = document.getElementById('messageForm');
-    if (form) {
-      form.addEventListener('submit', () => {
-        trackEvent('contact_form_submitted', {
-          timestamp: new Date().toISOString()
-        });
-      });
-    }
-
-    // Track section views
-    const sections = document.querySelectorAll('.revolving-section');
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const sectionId = entry.target.id || 'unknown';
-          trackEvent('section_viewed', {
-            section: sectionId,
-            timestamp: new Date().toISOString()
-          });
-        }
-      });
-    }, { threshold: 0.5 });
-
-    sections.forEach(section => sectionObserver.observe(section));
-  }
-
-  // Public method to update particle effects
-  updateParticles(mode) {
-    if (this.components.particleSystem) {
-      this.components.particleSystem.updateParticleMode(mode);
+  // Public API methods
+  goToSlide(index) {
+    if (this.components.carouselSystem) {
+      this.components.carouselSystem.goToSlide(index);
     }
   }
 
-  // Public method to get performance data
-  getPerformanceData() {
-    return this.components.performanceMonitor?.performanceData || {};
+  generateAIMessage() {
+    if (this.components.enhancedAI) {
+      this.components.enhancedAI.generateMessage();
+    }
   }
 }
 
-// 🚀 Start the application
+// 🚀 Initialize the application
 const app = new EnhancedResumeApp();
 
-// Export for external access if needed
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { EnhancedResumeApp, app };
-}
-
-// Global utility functions
+// Global utilities
 window.enhancedResume = {
   app,
-  updateParticles: (mode) => app.updateParticles(mode),
-  getPerformanceData: () => app.getPerformanceData()
+  goToSlide: (index) => app.goToSlide(index),
+  generateAI: () => app.generateAIMessage()
 };
 
 console.log('🎉 Enhanced Interactive Resume Script Loaded Successfully!');

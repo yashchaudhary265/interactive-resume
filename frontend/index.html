@@ -5,51 +5,46 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yash Chaudhary | Interactive Resume</title>
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="particles-js"></div>
 
   <header>
-    <img src="assets/yash.png" alt="Yash Chaudhary" class="profile-img" />
+    <img src="https://via.placeholder.com/180x220/00d4ff/000000?text=YASH" alt="Yash Chaudhary" class="profile-img" />
     <h1 class="typing">Yash Chaudhary</h1>
     
-    <nav>
-      <ul>
-        <li><a href="#contact">CONTACT DETAILS</a></li>
-        <li><a href="#pdf-rag">PDF RAG</a></li>
-        <li><a href="#summary">SUMMARY</a></li>
-        <li><a href="#education">EDUCATION</a></li>
-        <li><a href="#experience">EXPERIENCE</a></li>
-        <li><a href="#skills">SKILLS</a></li>
-        <li><a href="#projects">PROJECTS</a></li>
-        <li><a href="#build-together">LET'S BUILD</a></li>
-        <li><a href="#certifications">CERTIFICATIONS</a></li>
-      </ul>
-    </nav>
+    <!-- Carousel Navigation -->
+    <div class="carousel-nav">
+      <button class="nav-arrow" id="prevBtn">←</button>
+      <div class="section-indicator">
+        <span id="currentSection">Contact Details</span>
+        <span>(<span id="sectionNumber">1</span> / <span id="totalSections">8</span>)</span>
+      </div>
+      <button class="nav-arrow" id="nextBtn">→</button>
+    </div>
   </header>
 
   <main>
-    <div class="section-container">
+    <div class="carousel-container">
       
-      <!-- Contact Details -->
-      <section id="contact" class="revolving-section">
+      <!-- Contact Details Slide -->
+      <div class="section-slide active" data-section="Contact Details">
         <div class="section-card">
           <h2 class="section-title">Contact Details</h2>
-          <div style="text-align: center; font-size: 1.1rem; line-height: 1.8;">
+          <div class="contact-content">
             <p>📧 Email: yashch11@gmail.com</p>
             <p>📱 Phone: +91 9205161376</p>
             <p>
-              <a href="https://www.linkedin.com/in/yashchaudhary111203/" target="_blank" style="color: #00d4ff; margin-right: 20px;">LinkedIn</a>
-              <a href="https://github.com/yashchaudhary265" target="_blank" style="color: #00ffcc;">GitHub</a>
+              <a href="https://www.linkedin.com/in/yashchaudhary111203/" target="_blank">LinkedIn</a>
+              <a href="https://github.com/yashchaudhary265" target="_blank">GitHub</a>
             </p>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- NEW: PDF RAG Section -->
-      <section id="pdf-rag" class="revolving-section left-side">
+      <!-- PDF RAG Slide -->
+      <div class="section-slide" data-section="PDF Company Analysis">
         <div class="section-card">
           <h2 class="section-title">PDF Company Analysis</h2>
           <div class="pdf-rag-section">
@@ -87,13 +82,13 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Summary -->
-      <section id="summary" class="revolving-section">
+      <!-- Summary Slide -->
+      <div class="section-slide" data-section="Summary">
         <div class="section-card">
           <h2 class="section-title">Summary</h2>
-          <div style="line-height: 1.8; font-size: 1rem;">
+          <div class="summary-content">
             <p><strong>From Passion to Practice: How I Turned MERN Stack Development into My Daily Hobby</strong><br>
             <em>by Yash Chaudhary</em></p>
 
@@ -106,28 +101,46 @@
             <p><strong>Let's build something great, together.</strong></p>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Education -->
-      <section id="education" class="revolving-section left-side">
+      <!-- Education Slide -->
+      <div class="section-slide" data-section="Education">
         <div class="section-card">
           <h2 class="section-title">Education</h2>
-          <div style="line-height: 2; font-size: 1.1rem;">
-            <div style="margin-bottom: 15px;">🎓 Jaypee Institute of Information Technology, Noida (2023–2026)</div>
-            <div style="margin-bottom: 15px;">🏫 ABES Engineering College, Ghaziabad (2022–2023) – CGPA: 7.365</div>
-            <div>🏛️ Ryan International School – 12th: 91.2% | 10th: 88.4%</div>
+          <div class="education-content">
+            <div class="education-item">
+              <span>🎓</span>
+              <div>
+                <h3>Jaypee Institute of Information Technology, Noida</h3>
+                <p>2023–2026</p>
+              </div>
+            </div>
+            <div class="education-item">
+              <span>🏫</span>
+              <div>
+                <h3>ABES Engineering College, Ghaziabad</h3>
+                <p>2022–2023</p>
+              </div>
+            </div>
+            <div class="education-item">
+              <span>🏛️</span>
+              <div>
+                <h3>Ryan International School</h3>
+                <p>12th Standard</p>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Experience -->
-      <section id="experience" class="revolving-section">
+      <!-- Experience Slide -->
+      <div class="section-slide" data-section="Experience">
         <div class="section-card">
           <h2 class="section-title">Experience</h2>
-          <div>
-            <h3 style="color: #00ffcc; font-size: 1.4rem; margin-bottom: 15px;">Full Stack Developer Intern – Unified Mentor</h3>
-            <p style="color: #00d4ff; margin-bottom: 10px;">(Jun 2025–Aug 2025)</p>
-            <ul style="line-height: 1.8; padding-left: 20px;">
+          <div class="experience-content">
+            <h3>Full Stack Developer Intern – Unified Mentor</h3>
+            <p class="experience-date">(Jun 2025–Aug 2025)</p>
+            <ul>
               <li>Built interactive MERN stack platform to bridge investors and entrepreneurs</li>
               <li>Developed AI-powered resume web app with smart message replies</li>
               <li>Created soil farming agent tool featuring real-time data and animated visuals</li>
@@ -136,80 +149,120 @@
             </ul>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Skills -->
-      <section id="skills" class="revolving-section left-side">
+      <!-- Skills Slide -->
+      <div class="section-slide" data-section="Skills">
         <div class="section-card">
           <h2 class="section-title">Skills</h2>
           <div class="skill-cloud">
             <div class="skill-bubble">
-              <img src="assets/icons/DATAVISUALIZATION.png" alt="Data Visualization" />
+              <img src="https://via.placeholder.com/40x40/00d4ff/000000?text=DV" alt="Data Visualization" />
               <span>DATA VIZ</span>
             </div>
             <div class="skill-bubble">
-              <img src="assets/icons/MONGODB.png" alt="MongoDB" />
+              <img src="https://via.placeholder.com/40x40/4caf50/000000?text=M" alt="MongoDB" />
               <span>MongoDB</span>
             </div>
             <div class="skill-bubble">
-              <img src="assets/icons/python.png" alt="Python" />
+              <img src="https://via.placeholder.com/40x40/3776ab/000000?text=P" alt="Python" />
               <span>Python</span>
             </div>
             <div class="skill-bubble">
-              <img src="assets/icons/javascript.png" alt="JavaScript" />
+              <img src="https://via.placeholder.com/40x40/f7df1e/000000?text=JS" alt="JavaScript" />
               <span>JavaScript</span>
             </div>
             <div class="skill-bubble">
-              <img src="assets/icons/REACT.png" alt="React" />
+              <img src="https://via.placeholder.com/40x40/61dafb/000000?text=R" alt="React" />
               <span>REACT</span>
             </div>
             <div class="skill-bubble">
-              <img src="assets/icons/EXPRESSJS.png" alt="Express.js" />
+              <img src="https://via.placeholder.com/40x40/68a063/000000?text=E" alt="Express.js" />
               <span>EXPRESS</span>
             </div>
             <div class="skill-bubble">
-              <img src="assets/icons/NEXTJS.png" alt="Next.js" />
+              <img src="https://via.placeholder.com/40x40/000000/ffffff?text=N" alt="Next.js" />
               <span>NEXT.JS</span>
             </div>
             <div class="skill-bubble">
-              <img src="assets/icons/POWERBI.png" alt="Power BI" />
+              <img src="https://via.placeholder.com/40x40/f2c811/000000?text=PBI" alt="Power BI" />
               <span>POWER BI</span>
             </div>
             <div class="skill-bubble">
-              <img src="assets/icons/sql.png" alt="SQL" />
+              <img src="https://via.placeholder.com/40x40/336791/000000?text=SQL" alt="SQL" />
               <span>SQL</span>
             </div>
             <div class="skill-bubble">
-              <img src="assets/icons/git.png" alt="Git" />
+              <img src="https://via.placeholder.com/40x40/f05032/000000?text=G" alt="Git" />
               <span>Git</span>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Projects -->
-      <section id="projects" class="revolving-section">
+      <!-- Projects Slide -->
+      <div class="section-slide" data-section="Projects">
         <div class="section-card">
           <h2 class="section-title">Projects</h2>
           <div class="projects-grid">
             <div class="project-card">
-              <h3 class="project-title">🚀 INVEST Platform</h3>
-              <p>Full-stack MERN platform connecting entrepreneurs with investors. Features dual user forms, MongoDB storage, data visualization, and real-time analytics for startup ecosystems.</p>
-              <p><strong>Tech:</strong> React.js, Node.js, MongoDB, Chart.js, Three.js</p>
+              <h3 class="project-title">🚀 INVEST – Investor-Entrepreneur Platform</h3>
+              <p><strong>INVEST</strong> is a web platform that connects aspiring <strong>entrepreneurs</strong> with potential <strong>investors</strong>, offering a seamless space to submit startup ideas, express investment interests, and view real-time data via a centralized dashboard.</p>
+              <p>🛠️ <strong>Tech Stack:</strong> React.js, Node.js, Express, MongoDB, Chart.js, D3.js</p>
+              <p>📊 Integrated visualizations: Bar, Pie, Radar, and even 3D charts for insights</p>
+              <p>🔒 Features include: Secure authentication, dynamic forms, data-driven dashboard, and more</p>
+              <p>🌐 <strong>Frontend:</strong> Deployed on Vercel 🔗 <strong>Backend:</strong> Powered by Render 📁 <strong>Database:</strong> MongoDB Atlas</p>
+              <p>This platform aims to simplify and digitize the startup–investor connection journey. Whether you're pitching ideas or seeking funding opportunities, <strong>INVEST</strong> bridges the gap efficiently.</p>
               <a href="https://invest-rose.vercel.app/register" target="_blank" class="project-link">EXPLORE PROJECT</a>
             </div>
             <div class="project-card">
-              <h3 class="project-title">🌍 Soil Farming Agent</h3>
-              <p>Interactive globe-based farming intelligence portal with soil-specific guidance, region-wise recommendations, and admin dashboard for dynamic content management.</p>
-              <p><strong>Tech:</strong> React.js, Globe.gl, Three.js, Flask, MongoDB</p>
+              <h3 class="project-title">🌍 Soil Farming Agent – Global Soil Info App with Admin Portal</h3>
+              <p><strong>Frontend (Client)</strong><br>
+              <strong>Built with:</strong> React.js, Custom CSS, Three.js, Country-State Picker, EarthGlobe Visualization</p>
+              <p>• Developed an animated 3D Earth interface using `react-globe.gl` and `Three.js`, allowing users to click and explore soil regions.<br>
+              • Integrated dropdown menus to select countries and states, auto-zooming the globe to that region.<br>
+              • Designed unique animated pages for six soil types (Clay, Loamy, Chalky, Silty, Peaty, Sandy Loam), each styled with background videos and farming content.<br>
+              • Implemented role-based routing with user and admin dashboards.<br>
+              • Styled using custom CSS and effects like glow animations, page transitions, and thematic visuals per soil type.</p>
+              
+              <p>🖥️ <strong>Backend (Server)</strong><br>
+              <strong>Built with:</strong> Node.js, Express.js</p>
+              <p>• Created RESTful APIs for user registration, login, and admin post submission.<br>
+              • Role-based logic for user and admin access.<br>
+              • Used `bcrypt` for secure password hashing and Express middleware for JSON parsing and route logging.<br>
+              • CORS configured to allow frontend communication with secure Render-hosted backend APIs.<br>
+              • <strong>CRUD Operations:</strong> Complete Create, Read, Update, Delete functionality for soil data management.</p>
+              
+              <p>🗃️ <strong>Database & Storage</strong><br>
+              <strong>Technology:</strong> MongoDB Atlas (Cloud-hosted NoSQL Database)</p>
+              <p>• Stored user data, admin posts, and soil information using structured Mongoose schemas.<br>
+              • Enabled real-time updates and scalability using MongoDB Atlas cloud infrastructure.</p>
+              
+              <p>🚀 <strong>Deployment</strong><br>
+              • <strong>Frontend:</strong> Hosted on <strong>Vercel</strong> for fast, global CDN-based rendering.<br>
+              • <strong>Backend:</strong> Deployed on <strong>Render</strong>, exposing `/api/auth` and `/api/admin` endpoints.<br>
+              • Environment variables securely stored in `.env` files and not exposed in public repositories.<br>
+              • Used absolute URL-based API calls with `REACT_APP_API_URL` to connect client and server securely.</p>
+              
+              <p>📊 <strong>Key Functional Features</strong><br>
+              • Interactive 3D globe: click or select region to view soil info.<br>
+              • Rich content for each soil type: best crops, pesticides, weather, tips.<br>
+              • Admin dashboard for adding/modifying soil info posts dynamically.<br>
+              • User-friendly UI with animated visuals and dark-themed layout.<br>
+              • Fully responsive across devices and platforms.</p>
               <a href="https://soil-farming-agent-one.vercel.app/" target="_blank" class="project-link">EXPLORE PROJECT</a>
+            </div>
+            <div class="project-card">
+              <h3 class="project-title">💼 Interactive Resume – AI-Powered Portfolio with Contact & Messaging</h3>
+              <p>Created a dynamic resume web app using HTML, CSS, JS, Flask, and MongoDB backend. Integrated AI-powered message generation using Gemini API for smart contact replies. Built contact form with file upload, AI reply, and backend message handling via Flask. Deployed seamlessly on Render with unified backend/frontend routing and MongoDB Atlas.</p>
+              <a href="#" target="_blank" class="project-link">CURRENT PROJECT</a>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Let's Build Together with RAG -->
-      <section id="build-together" class="revolving-section left-side">
+      <!-- Let's Build Together with RAG Slide -->
+      <div class="section-slide" data-section="Let's Build Together">
         <div class="section-card">
           <h2 class="section-title">Let's Build Together</h2>
           <div class="contact-form-container">
@@ -223,7 +276,7 @@
               <div class="input-group">
                 <div class="input-wrapper">
                   <textarea id="company-description" rows="4" placeholder="Paste your company description here for AI-tuned messaging..."></textarea>
-                  <label>Company Description for AI Context</label>
+                  <label for="company-description">Company Description for AI Context</label>
                 </div>
               </div>
             </div>
@@ -232,21 +285,21 @@
               <div class="input-group">
                 <div class="input-wrapper">
                   <input type="text" name="name" id="user-name" required placeholder="Enter your full name" />
-                  <label>Your Name</label>
+                  <label for="user-name">Your Name</label>
                 </div>
               </div>
               
               <div class="input-group">
                 <div class="input-wrapper">
                   <input type="email" name="email" id="user-email" required placeholder="Enter your email address" />
-                  <label>Your Email</label>
+                  <label for="user-email">Your Email</label>
                 </div>
               </div>
               
               <div class="input-group">
                 <div class="input-wrapper">
                   <textarea name="message" id="user-message" rows="6" required placeholder="Type your message here or use AI to generate one..."></textarea>
-                  <label>Your Message</label>
+                  <label for="user-message">Your Message</label>
                 </div>
               </div>
 
@@ -261,37 +314,7 @@
             </form>
           </div>
         </div>
-      </section>
-
-      <!-- Certifications -->
-      <section id="certifications" class="revolving-section">
-        <div class="section-card">
-          <h2 class="section-title">Certifications</h2>
-          <div style="line-height: 2; font-size: 1rem;">
-            <div style="margin-bottom: 10px;">
-              <a href="https://www.linkedin.com/learning/certificates/b3f0c804f07699e135f9511e78d912ef004de5cc5a544932bbdb945187d450f9" target="_blank" style="color: #00d4ff;">📊 Data Analysis – Microsoft & LinkedIn</a>
-            </div>
-            <div style="margin-bottom: 10px;">
-              <a href="https://drive.google.com/file/d/1ocST2EMm62KfaecAS15s8AgoTbb5lNrN/view?usp=sharing" target="_blank" style="color: #00d4ff;">⚡ JavaScript – Great Learning</a>
-            </div>
-            <div style="margin-bottom: 10px;">
-              <a href="https://drive.google.com/file/d/1EwX5Ih5LFFcuVTgzTc6ZM8FXnY7weiP3/view?usp=sharing" target="_blank" style="color: #00d4ff;">🌐 HTML5 & CSS3 – Infosys Springboard</a>
-            </div>
-            <div style="margin-bottom: 10px;">
-              <a href="https://drive.google.com/file/d/1m0diloXSaSeGV4BqhWPvlx6U7iM9n-4V/view?usp=sharing" target="_blank" style="color: #00d4ff;">🧩 Problem Solving – HackerRank</a>
-            </div>
-            <div style="margin-bottom: 10px;">
-              <a href="https://drive.google.com/file/d/1hkNVGjB1sjPOXkf_Kgmp3l_lZp4_1DhB/view?usp=sharing" target="_blank" style="color: #00d4ff;">☁️ Amazon Aurora MySQL – AWS</a>
-            </div>
-            <div style="margin-bottom: 10px;">
-              <a href="https://www.linkedin.com/learning/certificates/4ad360c3844c3de12ef2bc5d69b21df9e67c8131ec3778a5c41c78ef19a5e9ab" target="_blank" style="color: #00d4ff;">🐍 Python in Excel – Microsoft</a>
-            </div>
-            <div>
-              <a href="https://www.linkedin.com/learning/certificates/ad00ba61e63f2fd7dbc1aee5ea81bf4f63e82d2ed77a035a6814171fadadcc6e" target="_blank" style="color: #00d4ff;">💾 SQL for Data Engineering – Microsoft</a>
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
 
     </div>
   </main>
@@ -300,612 +323,8 @@
     <p>&copy; 2025 Yash Chaudhary - Built with passion and code ✨</p>
   </footer>
 
-  <!-- Enhanced JavaScript -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
-    // Enhanced Particles Configuration
-    particlesJS('particles-js', {
-      "particles": {
-        "number": {
-          "value": 120,
-          "density": {
-            "enable": true,
-            "value_area": 800
-          }
-        },
-        "color": {
-          "value": "#00d4ff"
-        },
-        "shape": {
-          "type": "circle",
-          "stroke": {
-            "width": 0,
-            "color": "#000000"
-          }
-        },
-        "opacity": {
-          "value": 0.8,
-          "random": true,
-          "anim": {
-            "enable": true,
-            "speed": 1,
-            "opacity_min": 0.4,
-            "sync": false
-          }
-        },
-        "size": {
-          "value": 5,
-          "random": true,
-          "anim": {
-            "enable": true,
-            "speed": 2,
-            "size_min": 1,
-            "sync": false
-          }
-        },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#00d4ff",
-          "opacity": 0.6,
-          "width": 1.5
-        },
-        "move": {
-          "enable": true,
-          "speed": 3,
-          "direction": "none",
-          "random": true,
-          "straight": false,
-          "out_mode": "out",
-          "bounce": false,
-          "attract": {
-            "enable": true,
-            "rotateX": 600,
-            "rotateY": 1200
-          }
-        }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-          "onhover": {
-            "enable": true,
-            "mode": "repulse"
-          },
-          "onclick": {
-            "enable": true,
-            "mode": "push"
-          },
-          "resize": true
-        },
-        "modes": {
-          "grab": {
-            "distance": 400,
-            "line_linked": {
-              "opacity": 1
-            }
-          },
-          "bubble": {
-            "distance": 400,
-            "size": 40,
-            "duration": 2,
-            "opacity": 8,
-            "speed": 3
-          },
-          "repulse": {
-            "distance": 120,
-            "duration": 0.4
-          },
-          "push": {
-            "particles_nb": 4
-          },
-          "remove": {
-            "particles_nb": 2
-          }
-        }
-      },
-      "retina_detect": true
-    });
-
-    // FIXED: Enhanced Revolving Sections Animation
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          entry.target.classList.add('in-view');
-        }
-      });
-    }, observerOptions);
-
-    // Observe all revolving sections
-    document.querySelectorAll('.revolving-section').forEach(section => {
-      observer.observe(section);
-    });
-
-    // FIXED: Enhanced AI Button with Proper Message Generation (FROM USER TO YASH)
-    const BACKEND_URL = "https://interactive-resume-6shg.onrender.com";
-    
-    // SUPER FIXED: Input field handlers with maximum compatibility
-    function handleInputChange() {
-      document.querySelectorAll('.input-wrapper').forEach(wrapper => {
-        const input = wrapper.querySelector('input, textarea');
-        if (input) {
-          if (input.value.trim() !== '') {
-            wrapper.classList.add('has-value');
-          } else {
-            wrapper.classList.remove('has-value');
-          }
-        }
-      });
-    }
-
-    // SUPER FIXED: Enhanced event listener setup with maximum compatibility
-    function setupInputFields() {
-      document.querySelectorAll('.input-wrapper input, .input-wrapper textarea').forEach(input => {
-        // Force maximum clickability
-        input.style.pointerEvents = 'auto';
-        input.style.cursor = 'text';
-        input.style.userSelect = 'text';
-        input.style.zIndex = '1001';
-        
-        // Multiple event listeners for maximum compatibility
-        input.addEventListener('input', handleInputChange);
-        input.addEventListener('change', handleInputChange);
-        input.addEventListener('blur', handleInputChange);
-        input.addEventListener('focus', handleInputChange);
-        input.addEventListener('keyup', handleInputChange);
-        
-        // Force focus on click
-        input.addEventListener('click', function(e) {
-          e.stopPropagation();
-          this.focus();
-        });
-        
-        // Double click backup
-        input.addEventListener('dblclick', function(e) {
-          e.stopPropagation();
-          this.focus();
-          this.select();
-        });
-      });
-
-      // Also make input wrappers clickable
-      document.querySelectorAll('.input-wrapper').forEach(wrapper => {
-        wrapper.addEventListener('click', function(e) {
-          const input = this.querySelector('input, textarea');
-          if (input && e.target !== input) {
-            input.focus();
-          }
-        });
-      });
-
-      // Initialize input states
-      handleInputChange();
-    }
-
-    // Initialize when DOM is loaded
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupInputFields);
-    } else {
-      setupInputFields();
-    }
-
-    // Backup initialization after a delay
-    setTimeout(setupInputFields, 100);
-
-    // FIXED: AI Message Generation (FROM USER TO YASH)
-    document.getElementById('generate-ai').addEventListener('click', async () => {
-      const aiButton = document.getElementById('generate-ai');
-      const buttonText = aiButton.querySelector('.button-text');
-      const name = document.getElementById('user-name').value.trim();
-      const email = document.getElementById('user-email').value.trim();
-      const companyDesc = document.getElementById('company-description').value.trim();
-      
-      // Validate required fields
-      if (!name) {
-        alert('Please enter your name first.');
-        document.getElementById('user-name').focus();
-        return;
-      }
-      
-      if (!email) {
-        alert('Please enter your email first.');
-        document.getElementById('user-email').focus();
-        return;
-      }
-
-      // Add loading state and enhanced background effects
-      document.body.classList.add('ai-loading');
-      aiButton.classList.add('loading');
-      buttonText.textContent = '🧠 AI Generating...';
-      
-      // Enhanced particles during AI loading
-      const particlesContainer = document.getElementById('particles-js');
-      particlesContainer.style.filter = 'hue-rotate(120deg) brightness(1.8) saturate(1.5)';
-      
-      // FIXED: Create prompt that generates message FROM user TO Yash
-      let prompt = `Generate a professional message FROM ${name} (${email}) TO Yash Chaudhary expressing interest in collaboration.
-
-Context about Yash Chaudhary:
-- Computer Science student at JIIT Noida
-- Full-stack MERN developer (MongoDB, Express.js, React.js, Node.js)
-- Passionate about building web applications, AI integration, and data visualization
-- Experience with projects like INVEST platform and Soil Farming Agent
-- Skills include Python, JavaScript, React, Node.js, MongoDB, Power BI, and more
-- Recently completed internship at Unified Mentor (Jun-Aug 2025)
-
-Message sender: ${name} (${email})`;
-
-      if (companyDesc) {
-        prompt += `
-Company/Organization context: ${companyDesc}
-
-Generate a personalized message FROM ${name} TO Yash that:
-1. Introduces ${name} and their company/organization
-2. Expresses specific interest in Yash's skills that align with their needs
-3. Suggests concrete collaboration opportunities
-4. Maintains a professional yet enthusiastic tone
-5. Is 2-3 paragraphs long
-
-The message should sound like ${name} is writing TO Yash, not the other way around.`;
-      } else {
-        prompt += `
-
-Generate a professional message FROM ${name} TO Yash that:
-1. Introduces ${name} and expresses interest in Yash's work
-2. Highlights specific aspects of Yash's skills or projects that caught their attention
-3. Suggests potential collaboration in web development, AI integration, or data solutions
-4. Maintains an enthusiastic yet professional tone
-5. Is 2-3 paragraphs long
-
-The message should sound like ${name} is reaching out TO Yash for collaboration.`;
-      }
-
-      try {
-        const response = await fetch(`${BACKEND_URL}/generate-ai`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt })
-        });
-
-        const data = await response.json();
-
-        if (response.ok && data.generatedText) {
-          // Success animation
-          document.getElementById('user-message').value = data.generatedText;
-          buttonText.textContent = '✅ Generated!';
-          handleInputChange(); // Update label positions
-          
-          // Brief success state
-          setTimeout(() => {
-            buttonText.textContent = '🤖 Generate with AI';
-          }, 2000);
-        } else {
-          throw new Error(data.error || 'AI generation failed');
-        }
-      } catch (err) {
-        console.error('AI Generation Error:', err);
-        buttonText.textContent = '❌ Try Again';
-        alert('AI generation failed. Please try again or write your message manually.');
-        
-        setTimeout(() => {
-          buttonText.textContent = '🤖 Generate with AI';
-        }, 3000);
-      } finally {
-        // Remove loading states
-        document.body.classList.remove('ai-loading');
-        aiButton.classList.remove('loading');
-        particlesContainer.style.filter = '';
-      }
-    });
-
-    // Enhanced Form Submission
-    document.getElementById('messageForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const formData = {
-        name: document.getElementById('user-name').value.trim(),
-        email: document.getElementById('user-email').value.trim(),
-        message: document.getElementById('user-message').value.trim()
-      };
-
-      if (!formData.name || !formData.email || !formData.message) {
-        alert('Please fill in all required fields.');
-        return;
-      }
-
-      const sendButton = document.querySelector('.send-button');
-      const originalText = sendButton.textContent;
-      sendButton.textContent = '📤 Sending...';
-      sendButton.style.opacity = '0.7';
-
-      try {
-        const response = await fetch(`${BACKEND_URL}/send-message`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-
-        const result = await response.json();
-
-        if (response.ok && result.success) {
-          // Success animation
-          sendButton.textContent = '✅ Sent!';
-          sendButton.style.background = 'linear-gradient(135deg, #00ff88, #00dd66)';
-          
-          // Reset form
-          document.getElementById('messageForm').reset();
-          document.getElementById('company-description').value = '';
-          handleInputChange(); // Update label positions
-          
-          // Show success message
-          alert('✅ Message sent successfully! Yash will get back to you soon.');
-          
-          setTimeout(() => {
-            sendButton.textContent = originalText;
-            sendButton.style.background = '';
-            sendButton.style.opacity = '';
-          }, 3000);
-        } else {
-          throw new Error(result.error || 'Failed to send message');
-        }
-      } catch (error) {
-        console.error('Send Error:', error);
-        sendButton.textContent = '❌ Failed';
-        alert('Failed to send message. Please try again.');
-        
-        setTimeout(() => {
-          sendButton.textContent = originalText;
-          sendButton.style.opacity = '';
-        }, 3000);
-      }
-    });
-
-    // NEW: PDF Upload and Analysis Functionality
-    const pdfUploadArea = document.getElementById('pdf-upload-area');
-    const pdfFileInput = document.getElementById('pdf-file-input');
-    const pdfFileInfo = document.getElementById('pdf-file-info');
-    const pdfFileName = document.getElementById('pdf-file-name');
-    const pdfFileSize = document.getElementById('pdf-file-size');
-    const extractedDetails = document.getElementById('extracted-company-details');
-    const pdfSendButton = document.getElementById('pdf-send-company');
-
-    // PDF Upload Area Click
-    if (pdfUploadArea) {
-      pdfUploadArea.addEventListener('click', () => {
-        pdfFileInput.click();
-      });
-
-      // Drag and Drop functionality
-      pdfUploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        pdfUploadArea.classList.add('drag-over');
-      });
-
-      pdfUploadArea.addEventListener('dragleave', () => {
-        pdfUploadArea.classList.remove('drag-over');
-      });
-
-      pdfUploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        pdfUploadArea.classList.remove('drag-over');
-        const files = e.dataTransfer.files;
-        if (files[0] && files[0].type === 'application/pdf') {
-          handlePDFUpload(files[0]);
-        } else {
-          alert('Please upload a PDF file only.');
-        }
-      });
-    }
-
-    // File input change
-    if (pdfFileInput) {
-      pdfFileInput.addEventListener('change', (e) => {
-        if (e.target.files[0]) {
-          handlePDFUpload(e.target.files[0]);
-        }
-      });
-    }
-
-    // Handle PDF Upload
-    async function handlePDFUpload(file) {
-      // Show file info
-      if (pdfFileName) pdfFileName.textContent = file.name;
-      if (pdfFileSize) pdfFileSize.textContent = `${(file.size / 1024 / 1024).toFixed(2)} MB`;
-      if (pdfFileInfo) pdfFileInfo.style.display = 'block';
-
-      // Simulate AI extraction (in real implementation, you'd send to backend)
-      if (extractedDetails) {
-        extractedDetails.value = 'Processing PDF... AI is extracting company information...';
-        
-        // Simulate processing delay
-        setTimeout(() => {
-          extractedDetails.value = `Company: ${file.name.replace('.pdf', '').toUpperCase()}
-Industry: Technology/Software Development
-Description: AI-extracted company information will appear here. This would include company overview, services, industry sector, key technologies, and business focus areas.
-
-Key Technologies: [Extracted from PDF]
-Business Focus: [Extracted from PDF]
-Contact Information: [Extracted from PDF]
-
-Note: This is a simulation. In the actual implementation, the PDF would be processed by AI to extract real company information.`;
-          handleInputChange();
-        }, 2000);
-      }
-    }
-
-    // PDF Send Company Analysis
-    if (pdfSendButton) {
-      pdfSendButton.addEventListener('click', async () => {
-        const companyDetails = extractedDetails ? extractedDetails.value.trim() : '';
-        
-        if (!companyDetails || companyDetails.includes('Processing PDF')) {
-          alert('Please wait for PDF processing to complete.');
-          return;
-        }
-
-        const sendButton = pdfSendButton;
-        const originalText = sendButton.textContent;
-        sendButton.textContent = '📤 Sending Analysis...';
-        sendButton.disabled = true;
-
-        try {
-          const response = await fetch(`${BACKEND_URL}/send-message`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              name: 'PDF Company Analysis',
-              email: 'ai-extracted@company.com',
-              message: `AI-Extracted Company Analysis:
-
-${companyDetails}
-
-Source: PDF Upload via RAG System
-Timestamp: ${new Date().toISOString()}`
-            })
-          });
-
-          const result = await response.json();
-
-          if (response.ok && result.success) {
-            sendButton.textContent = '✅ Analysis Sent!';
-            sendButton.style.background = 'linear-gradient(135deg, #00ff88, #00dd66)';
-            alert('✅ Company analysis sent to Yash successfully!');
-            
-            setTimeout(() => {
-              sendButton.textContent = originalText;
-              sendButton.style.background = '';
-              sendButton.disabled = false;
-            }, 3000);
-          } else {
-            throw new Error(result.error || 'Failed to send analysis');
-          }
-        } catch (error) {
-          console.error('Send Error:', error);
-          sendButton.textContent = '❌ Failed';
-          alert('Failed to send analysis. Please try again.');
-          
-          setTimeout(() => {
-            sendButton.textContent = originalText;
-            sendButton.disabled = false;
-          }, 3000);
-        }
-      });
-    }
-
-    // Smooth scrolling for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Enhanced scroll effects for sections (FIXED for proper left-to-right revolution)
-    let ticking = false;
-    
-    function updateSections() {
-      const sections = document.querySelectorAll('.revolving-section');
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      
-      sections.forEach((section, index) => {
-        const rect = section.getBoundingClientRect();
-        const sectionCenter = rect.top + rect.height / 2;
-        const distanceFromCenter = sectionCenter - windowHeight / 2;
-        const normalizedDistance = distanceFromCenter / (windowHeight / 2);
-        
-        // Enhanced 3D transform for left-to-right revolution
-        const rotateY = Math.max(-25, Math.min(25, normalizedDistance * 8));
-        const translateZ = Math.max(-50, Math.min(0, -Math.abs(normalizedDistance) * 30));
-        const scale = Math.max(0.95, Math.min(1, 1 - Math.abs(normalizedDistance) * 0.03));
-        
-        if (section.classList.contains('visible')) {
-          section.style.transform = `
-            perspective(1500px) 
-            rotateY(${rotateY}deg) 
-            translateZ(${translateZ}px) 
-            scale(${scale})
-          `;
-        }
-      });
-      
-      ticking = false;
-    }
-
-    function requestTick() {
-      if (!ticking) {
-        requestAnimationFrame(updateSections);
-        ticking = true;
-      }
-    }
-
-    // Add scroll listener for continuous 3D effects
-    window.addEventListener('scroll', requestTick);
-
-    // Initialize on load
-    window.addEventListener('load', () => {
-      updateSections();
-      handleInputChange();
-      setupInputFields(); // Extra setup on load
-      
-      // Add entrance animations with stagger
-      document.querySelectorAll('.revolving-section').forEach((section, index) => {
-        setTimeout(() => {
-          if (isInViewport(section)) {
-            section.classList.add('visible');
-          }
-        }, index * 200);
-      });
-    });
-
-    function isInViewport(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-    }
-
-    // Profile image interaction
-    const profileImg = document.querySelector('.profile-img');
-    if (profileImg) {
-      profileImg.addEventListener('click', () => {
-        profileImg.style.transition = 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-        profileImg.style.transform = 'rotateY(360deg) scale(1.1)';
-        
-        setTimeout(() => {
-          profileImg.style.transform = '';
-        }, 800);
-      });
-    }
-
-    // Enhanced skill bubbles interaction
-    document.querySelectorAll('.skill-bubble').forEach(bubble => {
-      bubble.addEventListener('mouseenter', () => {
-        bubble.style.animationPlayState = 'paused';
-        bubble.style.transform = 'translateY(-15px) scale(1.15) rotateY(10deg)';
-      });
-      
-      bubble.addEventListener('mouseleave', () => {
-        bubble.style.animationPlayState = 'running';
-        bubble.style.transform = '';
-      });
-    });
-
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
