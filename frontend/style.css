@@ -89,6 +89,31 @@ header {
   50% { border-color: transparent; }
 }
 
+/* Contact Button */
+.contact-btn-container {
+  margin: 20px 0;
+}
+
+.contact-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+  color: white;
+  text-decoration: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  user-select: none;
+}
+
+.contact-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+  background: linear-gradient(135deg, #ff8e53, #ff6b6b);
+}
+
 /* Carousel Navigation */
 .carousel-nav {
   display: flex;
@@ -837,6 +862,60 @@ main {
   justify-content: center;
   position: relative;
   z-index: 10;
+}
+
+/* Certifications Section */
+.certifications-content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.certification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 25px;
+  background: rgba(0, 212, 255, 0.05);
+  border-radius: 15px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.certification-item:hover {
+  background: rgba(0, 212, 255, 0.1);
+  transform: translateX(10px);
+  border-color: rgba(0, 212, 255, 0.4);
+}
+
+.certification-item span {
+  font-size: 2rem;
+  user-select: none;
+}
+
+.certification-item h3 {
+  color: #00ffcc;
+  margin-bottom: 8px;
+  user-select: text;
+  font-size: 1.2rem;
+}
+
+.certification-item p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 10px;
+  user-select: text;
+}
+
+.cert-link {
+  display: inline-block;
+  color: #00d4ff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 12px;
+  border: 1px solid #00d4ff;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
 }
 
 /* Footer */

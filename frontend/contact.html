@@ -8,15 +8,6 @@
   <link href="style.css" rel="stylesheet" />
   <style>
     body {
-      #particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  }
       background: #111;
       color: #eee;
       font-family: 'Segoe UI', sans-serif;
@@ -25,6 +16,16 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+    }
+
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
 
     header {
@@ -113,11 +114,18 @@
       background: #00ddaa;
     }
 
-  
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .delayed {
+      animation-delay: 0.3s;
+      animation-fill-mode: backwards;
     }
   </style>
 </head>
@@ -133,7 +141,7 @@
 
   <main class="fade-in delayed">
     <form id="messageForm" class="contact-form" enctype="multipart/form-data">
-
+      
       <label for="user-name">Your Name</label>
       <input type="text" name="name" id="user-name" placeholder="Enter your name" required />
 
@@ -155,6 +163,81 @@
     </form>
   </main>
 
+  <!-- Add Particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Initialize particles for contact page
+    if (typeof particlesJS !== 'undefined') {
+      particlesJS('particles-js', {
+        "particles": {
+          "number": {
+            "value": 80,
+            "density": {
+              "enable": true,
+              "value_area": 800
+            }
+          },
+          "color": {
+            "value": "#00f7ff"
+          },
+          "shape": {
+            "type": "circle"
+          },
+          "opacity": {
+            "value": 0.5,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 3,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 2,
+              "size_min": 0.1,
+              "sync": false
+            }
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#00f7ff",
+            "opacity": 0.4,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 2,
+            "direction": "none",
+            "random": false,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "repulse"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          }
+        },
+        "retina_detect": true
+      });
+    }
+  </script>
   <script src="contact.js"></script>
 </body>
 </html>
