@@ -306,7 +306,7 @@ If you found this project helpful or inspiring, please consider:
 [![Get In Touch](https://img.shields.io/badge/Get_In_Touch-FF6B6B?style=for-the-badge&logo=gmail&logoColor=white)](https://yashchaudhary265.github.io/interactive-resume/contact.html)
 [![View Live Demo](https://img.shields.io/badge/View_Live_Demo-00D4FF?style=for-the-badge&logo=vercel&logoColor=white)](https://yashchaudhary265.github.io/interactive-resume/)
 
-**Built with 💙 by Yash Chaudhary**
+**Built by Yash Chaudhary**
 
 *"From passion to practice - building the future one line of code at a time."*
 
