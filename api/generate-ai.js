@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 
   try {
     const result = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -14,10 +14,31 @@ export default async function handler(req, res) {
         }),
       }
     );
+    
     const json = await result.json();
-    const response = json?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
-    res.status(200).json({ response });
+    
+    // Enhanced error handling
+    if (!json.candidates || json.candidates.length === 0) {
+      return res.status(500).json({ 
+        error: "No response generated from AI",
+        details: json.error || "Unknown error"
+      });
+    }
+    
+    const generatedText = json?.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated";
+    
+    // ✅ Fixed: Return 'generatedText' key to match enhanced script
+    res.status(200).json({ 
+      generatedText,
+      success: true,
+      timestamp: new Date().toISOString()
+    });
+    
   } catch (err) {
-    res.status(500).json({ error: "Gemini error: " + err.message });
+    console.error("Gemini API Error:", err);
+    res.status(500).json({ 
+      error: "Gemini error: " + err.message,
+      success: false
+    });
   }
 }
