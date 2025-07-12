@@ -527,13 +527,19 @@ main {
   border: 1px solid rgba(0, 212, 255, 0.2);
   transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  pointer-events: auto;
+  z-index: 10;
 }
 
 .project-card:hover {
   transform: translateY(-8px);
   border-color: #00ffcc;
   box-shadow: 0 20px 40px rgba(0, 255, 204, 0.2);
+}
+
+.project-card * {
+  pointer-events: auto;
 }
 
 .project-title {
@@ -559,12 +565,20 @@ main {
   border: 1px solid #00ffcc;
   border-radius: 8px;
   transition: all 0.3s ease;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  z-index: 100;
+  position: relative;
 }
 
 .project-link:hover {
   background: #00ffcc;
   color: #000;
   transform: translateY(-2px);
+}
+
+.project-link:active {
+  transform: translateY(0);
 }
 
 /* Form Styles */
@@ -726,7 +740,7 @@ main {
   user-select: none;
 }
 
-/* Input Groups - FIXED for proper selection */
+/* Input Groups - COMPLETELY FIXED for proper selection */
 .input-group {
   margin-bottom: 25px;
   position: relative;
@@ -741,6 +755,7 @@ main {
   transition: all 0.3s ease;
   display: block;
   width: 100%;
+  z-index: 15;
 }
 
 .input-wrapper:focus-within {
@@ -765,22 +780,24 @@ main {
   font-size: 1rem;
   font-family: 'Orbitron', sans-serif;
   position: relative;
-  z-index: 15;
+  z-index: 25;
   resize: none;
   cursor: text;
-  pointer-events: auto;
-  user-select: text;
+  pointer-events: auto !important;
+  user-select: text !important;
   display: block;
   box-sizing: border-box;
   border-radius: 12px;
+  min-height: auto;
 }
 
 .input-wrapper input:focus,
 .input-wrapper textarea:focus {
   background: rgba(0, 0, 0, 0.3);
-  z-index: 25;
-  outline: none;
-  border: none;
+  z-index: 30;
+  outline: none !important;
+  border: none !important;
+  cursor: text;
 }
 
 .input-wrapper input::placeholder,
@@ -803,6 +820,19 @@ main {
   user-select: none;
 }
 
+/* Specific fix for textarea */
+textarea#user-message,
+textarea#company-description,
+textarea#extracted-company-details {
+  pointer-events: auto !important;
+  cursor: text !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  touch-action: manipulation !important;
+}
+
 /* Label Styles - FIXED positioning */
 .input-wrapper label {
   position: absolute;
@@ -813,7 +843,7 @@ main {
   transition: all 0.3s ease;
   font-weight: 500;
   font-size: 0.85rem;
-  z-index: 30;
+  z-index: 35;
   background: #0a0a0a;
   padding: 0 8px;
   border-radius: 4px;
@@ -833,7 +863,7 @@ main {
   top: -12px;
 }
 
-/* Button Styles */
+/* Button Styles - FIXED for proper interaction */
 .ai-button {
   background: linear-gradient(135deg, #00d4ff, #00ffcc);
   color: #000;
@@ -841,7 +871,7 @@ main {
   border: none;
   border-radius: 12px;
   padding: 15px 30px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-family: 'Orbitron', sans-serif;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -850,6 +880,8 @@ main {
   text-transform: uppercase;
   letter-spacing: 1px;
   user-select: none;
+  pointer-events: auto !important;
+  z-index: 100;
 }
 
 .ai-button:hover {
@@ -890,13 +922,15 @@ main {
   border: none;
   border-radius: 12px;
   padding: 15px 30px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-family: 'Orbitron', sans-serif;
   font-size: 1rem;
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 1px;
   user-select: none;
+  pointer-events: auto !important;
+  z-index: 100;
 }
 
 .send-button:hover {
@@ -911,7 +945,7 @@ main {
   border: none;
   border-radius: 12px;
   padding: 15px 30px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-family: 'Orbitron', sans-serif;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -920,6 +954,8 @@ main {
   width: 100%;
   margin-top: 20px;
   user-select: none;
+  pointer-events: auto !important;
+  z-index: 100;
 }
 
 .pdf-send-button:hover {
@@ -933,7 +969,14 @@ main {
   margin-top: 30px;
   justify-content: center;
   position: relative;
-  z-index: 10;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.button-group button {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  z-index: 101;
 }
 
 /* Certifications Section */
@@ -1054,6 +1097,23 @@ main {
   color: #00ffcc;
 }
 
+/* Footer */
+footer {
+  background: rgba(0, 0, 0, 0.95);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid rgba(0, 212, 255, 0.3);
+  position: relative;
+  z-index: 100;
+  user-select: none;
+}
+  padding: 20px;
+  border-top: 1px solid rgba(0, 212, 255, 0.3);
+  position: relative;
+  z-index: 100;
+  user-select: none;
+}
 
 /* Custom Scrollbar */
 .section-card::-webkit-scrollbar {

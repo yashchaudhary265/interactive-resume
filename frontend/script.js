@@ -464,14 +464,22 @@ class FormHandler {
   }
 
   setupInputHandlers() {
-    // Get all input elements
-    const inputs = document.querySelectorAll('.input-wrapper input, .input-wrapper textarea');
+    // Get all input elements with more specific targeting
+    const inputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
     
     inputs.forEach(input => {
       // Ensure inputs are properly clickable and selectable
       input.style.pointerEvents = 'auto';
       input.style.userSelect = 'text';
       input.style.cursor = 'text';
+      input.style.webkitUserSelect = 'text';
+      input.style.mozUserSelect = 'text';
+      input.style.msUserSelect = 'text';
+      input.style.touchAction = 'manipulation';
+      
+      // Remove any conflicting properties
+      input.removeAttribute('readonly');
+      input.removeAttribute('disabled');
       
       // Handle input changes for label animation
       input.addEventListener('input', () => this.handleInputChange(input));
@@ -479,26 +487,70 @@ class FormHandler {
       input.addEventListener('blur', () => this.handleInputBlur(input));
       input.addEventListener('change', () => this.handleInputChange(input));
       
-      // Force focus on click
+      // Force focus on click with event propagation
       input.addEventListener('click', (e) => {
         e.stopPropagation();
+        e.preventDefault();
         input.focus();
+        // Ensure cursor is at the end for textareas
+        if (input.tagName === 'TEXTAREA') {
+          const length = input.value.length;
+          input.setSelectionRange(length, length);
+        }
+      });
+
+      // Handle touch events for mobile
+      input.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        input.focus();
+      });
+
+      // Handle double-click for full selection
+      input.addEventListener('dblclick', (e) => {
+        e.stopPropagation();
+        input.select();
       });
     });
 
     // Make input wrappers clickable
     document.querySelectorAll('.input-wrapper').forEach(wrapper => {
+      wrapper.style.pointerEvents = 'auto';
       wrapper.addEventListener('click', (e) => {
         const input = wrapper.querySelector('input, textarea');
         if (input && e.target !== input) {
           e.preventDefault();
+          e.stopPropagation();
           input.focus();
+          // Move cursor to end
+          if (input.tagName === 'TEXTAREA' || input.type === 'text' || input.type === 'email') {
+            const length = input.value.length;
+            input.setSelectionRange(length, length);
+          }
         }
       });
     });
 
     // Initialize input states
     inputs.forEach(input => this.handleInputChange(input));
+
+    // Specific fix for the message textarea
+    const messageTextarea = document.getElementById('user-message');
+    if (messageTextarea) {
+      messageTextarea.style.pointerEvents = 'auto';
+      messageTextarea.style.cursor = 'text';
+      messageTextarea.style.userSelect = 'text';
+      messageTextarea.removeAttribute('readonly');
+      
+      // Additional event listeners for problematic textarea
+      messageTextarea.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+      });
+      
+      messageTextarea.addEventListener('mouseup', (e) => {
+        e.stopPropagation();
+        messageTextarea.focus();
+      });
+    }
   }
 
   handleInputChange(input) {
@@ -1089,6 +1141,7 @@ class EnhancedResumeApp {
       // Initialize core components
       this.components.particleSystem = new ParticleSystem();
       this.components.carouselSystem = new CarouselSystem();
+      this.components.navigationMenu = new NavigationMenu();
       this.components.formHandler = new FormHandler();
       this.components.enhancedAI = new EnhancedAI();
       this.components.pdfHandler = new PDFHandler();
@@ -1097,9 +1150,68 @@ class EnhancedResumeApp {
 
       console.log('✅ All components initialized successfully');
       this.setupGlobalEvents();
+      this.fixButtonInteractions();
       
     } catch (error) {
       console.error('❌ Error initializing components:', error);
+    }
+  }
+
+  fixButtonInteractions() {
+    // Fix all button interactions
+    document.querySelectorAll('button, .project-link, .cert-link').forEach(element => {
+      element.style.pointerEvents = 'auto';
+      element.style.cursor = 'pointer';
+      element.style.zIndex = '100';
+      
+      // Ensure click events work
+      element.addEventListener('click', function(e) {
+        e.stopPropagation();
+        // For links, ensure they work
+        if (this.tagName === 'A' && this.href) {
+          if (this.target === '_blank') {
+            window.open(this.href, '_blank');
+          } else {
+            window.location.href = this.href;
+          }
+        }
+      });
+
+      // Add visual feedback
+      element.addEventListener('mousedown', function() {
+        this.style.transform = 'scale(0.98)';
+      });
+
+      element.addEventListener('mouseup', function() {
+        this.style.transform = '';
+      });
+    });
+
+    // Specific fix for project links
+    document.querySelectorAll('.project-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (this.href && this.href !== '#') {
+          window.open(this.href, '_blank');
+        }
+      });
+    });
+
+    // Specific fix for AI and send buttons
+    const aiButton = document.getElementById('generate-ai');
+    const sendButton = document.querySelector('.send-button');
+    
+    if (aiButton) {
+      aiButton.style.pointerEvents = 'auto';
+      aiButton.style.cursor = 'pointer';
+      aiButton.style.zIndex = '101';
+    }
+    
+    if (sendButton) {
+      sendButton.style.pointerEvents = 'auto';
+      sendButton.style.cursor = 'pointer';
+      sendButton.style.zIndex = '101';
     }
   }
 
@@ -1169,5 +1281,12 @@ window.enhancedResume = {
   goToSlide: (index) => app.goToSlide(index),
   generateAI: () => app.generateAIMessage()
 };
+
+// Global function for navigation links
+function goToSection(index) {
+  if (window.enhancedResume && window.enhancedResume.app && window.enhancedResume.app.components.carouselSystem) {
+    window.enhancedResume.app.components.carouselSystem.goToSlide(index);
+  }
+}
 
 console.log('🎉 Enhanced Interactive Resume Script Loaded Successfully!');
