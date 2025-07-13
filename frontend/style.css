@@ -384,12 +384,16 @@ main {
   user-select: none;
 }
 
-/* Content Sections */
+/* Content Sections with Enhanced Scrolling */
 .contact-content {
   text-align: center;
   font-size: 1.1rem;
   line-height: 2;
   user-select: text;
+  height: calc(100vh - 450px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
 }
 
 .contact-content a {
@@ -412,6 +416,10 @@ main {
   line-height: 1.8;
   font-size: 1rem;
   user-select: text;
+  height: calc(100vh - 450px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
 }
 
 .summary-content p {
@@ -646,7 +654,7 @@ main {
   overflow-x: hidden;
 }
 
-/* PDF RAG Section */
+/* PDF RAG Section with Enhanced Scrolling */
 .pdf-rag-section {
   background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.05));
   border: 2px solid rgba(255, 215, 0, 0.3);
@@ -654,7 +662,9 @@ main {
   padding: 30px;
   margin-bottom: 40px;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 400px);
 }
 
 .pdf-rag-section::before {
@@ -1102,15 +1112,18 @@ textarea#extracted-company-details {
   color: #000;
 }
 
-/* CUSTOM SCROLLBAR STYLES */
+/* ENHANCED CUSTOM SCROLLBAR STYLES - BIGGER AND BETTER */
 .section-card::-webkit-scrollbar,
 .projects-grid::-webkit-scrollbar,
 .skill-cloud::-webkit-scrollbar,
 .education-content::-webkit-scrollbar,
 .experience-content::-webkit-scrollbar,
 .certifications-content::-webkit-scrollbar,
-.contact-form-container::-webkit-scrollbar {
-  width: 8px;
+.contact-form-container::-webkit-scrollbar,
+.summary-content::-webkit-scrollbar,
+.contact-content::-webkit-scrollbar,
+.pdf-rag-section::-webkit-scrollbar {
+  width: 12px;
 }
 
 .section-card::-webkit-scrollbar-track,
@@ -1119,9 +1132,13 @@ textarea#extracted-company-details {
 .education-content::-webkit-scrollbar-track,
 .experience-content::-webkit-scrollbar-track,
 .certifications-content::-webkit-scrollbar-track,
-.contact-form-container::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
+.contact-form-container::-webkit-scrollbar-track,
+.summary-content::-webkit-scrollbar-track,
+.contact-content::-webkit-scrollbar-track,
+.pdf-rag-section::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 212, 255, 0.1);
 }
 
 .section-card::-webkit-scrollbar-thumb,
@@ -1130,9 +1147,14 @@ textarea#extracted-company-details {
 .education-content::-webkit-scrollbar-thumb,
 .experience-content::-webkit-scrollbar-thumb,
 .certifications-content::-webkit-scrollbar-thumb,
-.contact-form-container::-webkit-scrollbar-thumb {
+.contact-form-container::-webkit-scrollbar-thumb,
+.summary-content::-webkit-scrollbar-thumb,
+.contact-content::-webkit-scrollbar-thumb,
+.pdf-rag-section::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, #00d4ff, #00ffcc);
-  border-radius: 4px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 212, 255, 0.2);
 }
 
 .section-card::-webkit-scrollbar-thumb:hover,
@@ -1141,8 +1163,12 @@ textarea#extracted-company-details {
 .education-content::-webkit-scrollbar-thumb:hover,
 .experience-content::-webkit-scrollbar-thumb:hover,
 .certifications-content::-webkit-scrollbar-thumb:hover,
-.contact-form-container::-webkit-scrollbar-thumb:hover {
+.contact-form-container::-webkit-scrollbar-thumb:hover,
+.summary-content::-webkit-scrollbar-thumb:hover,
+.contact-content::-webkit-scrollbar-thumb:hover,
+.pdf-rag-section::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #00ffcc, #00d4ff);
+  box-shadow: 0 4px 8px rgba(0, 255, 204, 0.4);
 }
 
 /* Contact Page Styles */
@@ -1224,11 +1250,14 @@ footer {
   .skill-cloud,
   .education-content,
   .experience-content,
-  .certifications-content {
+  .certifications-content,
+  .summary-content,
+  .contact-content {
     height: calc(100vh - 400px);
   }
   
-  .contact-form-container {
+  .contact-form-container,
+  .pdf-rag-section {
     height: calc(100vh - 350px);
   }
 }
@@ -1362,7 +1391,8 @@ footer {
     min-height: 300px;
   }
   
-  .contact-form-container {
+  .contact-form-container,
+  .pdf-rag-section {
     padding: 25px;
     height: calc(100vh - 320px);
   }
@@ -1370,8 +1400,24 @@ footer {
   .skill-cloud,
   .education-content,
   .experience-content,
-  .certifications-content {
+  .certifications-content,
+  .summary-content,
+  .contact-content {
     height: calc(100vh - 380px);
+  }
+
+  /* MOBILE SCROLLBAR STYLES */
+  .section-card::-webkit-scrollbar,
+  .projects-grid::-webkit-scrollbar,
+  .skill-cloud::-webkit-scrollbar,
+  .education-content::-webkit-scrollbar,
+  .experience-content::-webkit-scrollbar,
+  .certifications-content::-webkit-scrollbar,
+  .contact-form-container::-webkit-scrollbar,
+  .summary-content::-webkit-scrollbar,
+  .contact-content::-webkit-scrollbar,
+  .pdf-rag-section::-webkit-scrollbar {
+    width: 8px;
   }
 }
 
@@ -1422,11 +1468,13 @@ footer {
   .skill-cloud,
   .education-content,
   .experience-content,
-  .certifications-content {
+  .certifications-content,
+  .summary-content {
     height: calc(100vh - 420px);
   }
   
-  .contact-form-container {
+  .contact-form-container,
+  .pdf-rag-section {
     height: calc(100vh - 380px);
   }
 }
