@@ -253,14 +253,13 @@ header {
   color: #00ffcc;
 }
 
-/* Main Container - FIXED HEIGHT CONSTRAINTS */
+/* Main Container - FIXED SPECIFIC HEIGHT */
 main {
-  min-height: calc(100vh - 200px);
-  overflow: visible !important;
+  height: calc(100vh - 200px);
+  overflow: hidden;
   position: relative;
   perspective: 1500px;
   padding: 10px 0;
-  height: auto !important;
 }
 
 .carousel-container {
@@ -268,20 +267,17 @@ main {
   margin: 0 auto;
   padding: 0 20px;
   position: relative;
-  min-height: 100%;
-  height: auto !important;
-  overflow: visible !important;
+  height: 100%;
+  overflow: hidden;
 }
 
-/* Section Slides - FIXED HEIGHT AND POINTER EVENTS */
+/* Section Slides - FIXED HEIGHT */
 .section-slide {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  min-height: calc(100vh - 220px);
-  height: auto !important;
-  max-height: none !important;
+  height: calc(100vh - 220px);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -293,7 +289,7 @@ main {
   backface-visibility: hidden;
   will-change: transform, opacity;
   padding: 20px 0;
-  overflow: visible !important;
+  overflow: hidden;
   pointer-events: none !important;
 }
 
@@ -303,8 +299,7 @@ main {
   z-index: 10;
   transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
   pointer-events: auto !important;
-  overflow: visible !important;
-  height: auto !important;
+  overflow: visible;
 }
 
 .section-slide.active * {
@@ -329,7 +324,7 @@ main {
   pointer-events: none !important;
 }
 
-/* Section Card - FIXED HEIGHT */
+/* Section Card - FIXED HEIGHT WITH SCROLL */
 .section-card {
   background: rgba(0, 0, 0, 0.9);
   border-radius: 20px;
@@ -340,16 +335,15 @@ main {
     inset 0 0 20px rgba(0, 212, 255, 0.05);
   backdrop-filter: blur(20px);
   position: relative;
-  overflow: visible !important;
   width: 100%;
   max-width: 950px;
-  min-height: calc(100vh - 280px);
-  height: auto !important;
-  max-height: none !important;
+  height: calc(100vh - 280px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   pointer-events: auto !important;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .section-card:hover {
@@ -424,10 +418,15 @@ main {
   margin-bottom: 15px;
 }
 
+/* EDUCATION SECTION - FIXED HEIGHT WITH SCROLL */
 .education-content {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  height: calc(100vh - 450px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
 }
 
 .education-item {
@@ -462,6 +461,14 @@ main {
   user-select: text;
 }
 
+/* EXPERIENCE SECTION - FIXED HEIGHT WITH SCROLL */
+.experience-content {
+  height: calc(100vh - 450px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+}
+
 .experience-content h3 {
   color: #00ffcc;
   font-size: 1.4rem;
@@ -485,13 +492,16 @@ main {
   user-select: text;
 }
 
-/* Skills Section */
+/* SKILLS SECTION - FIXED HEIGHT WITH SCROLL */
 .skill-cloud {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
   padding: 20px 0;
+  height: calc(100vh - 450px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .skill-bubble {
@@ -544,14 +554,16 @@ main {
   pointer-events: none;
 }
 
-/* Projects Section - FIXED HEIGHT AND ACCESSIBILITY */
+/* PROJECTS SECTION - SPECIFIC HEIGHT WITH SCROLL */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 30px;
   margin-top: 20px;
-  height: auto !important;
-  overflow: visible !important;
+  height: calc(100vh - 400px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
 }
 
 .project-card {
@@ -561,10 +573,11 @@ main {
   border: 1px solid rgba(0, 212, 255, 0.2);
   transition: all 0.3s ease;
   position: relative;
-  overflow: visible !important;
+  overflow: visible;
   pointer-events: auto !important;
   z-index: 50 !important;
-  height: auto !important;
+  height: fit-content;
+  min-height: 400px;
 }
 
 .project-card:hover {
@@ -619,7 +632,7 @@ main {
   transform: translateY(0) !important;
 }
 
-/* Form Styles */
+/* CONTACT FORM - FIXED HEIGHT WITH SCROLL */
 .contact-form-container {
   background: rgba(0, 0, 0, 0.95);
   border-radius: 25px;
@@ -628,6 +641,9 @@ main {
   box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
   backdrop-filter: blur(25px);
   position: relative;
+  height: calc(100vh - 400px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* PDF RAG Section */
@@ -1019,11 +1035,15 @@ textarea#extracted-company-details {
   z-index: 1001 !important;
 }
 
-/* Certifications Section */
+/* CERTIFICATIONS SECTION - FIXED HEIGHT WITH SCROLL */
 .certifications-content {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  height: calc(100vh - 450px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
 }
 
 .certification-item {
@@ -1082,22 +1102,47 @@ textarea#extracted-company-details {
   color: #000;
 }
 
-/* Custom Scrollbar for Section Slides */
-.section-slide::-webkit-scrollbar {
-  width: 6px;
+/* CUSTOM SCROLLBAR STYLES */
+.section-card::-webkit-scrollbar,
+.projects-grid::-webkit-scrollbar,
+.skill-cloud::-webkit-scrollbar,
+.education-content::-webkit-scrollbar,
+.experience-content::-webkit-scrollbar,
+.certifications-content::-webkit-scrollbar,
+.contact-form-container::-webkit-scrollbar {
+  width: 8px;
 }
 
-.section-slide::-webkit-scrollbar-track {
-  background: transparent;
+.section-card::-webkit-scrollbar-track,
+.projects-grid::-webkit-scrollbar-track,
+.skill-cloud::-webkit-scrollbar-track,
+.education-content::-webkit-scrollbar-track,
+.experience-content::-webkit-scrollbar-track,
+.certifications-content::-webkit-scrollbar-track,
+.contact-form-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 }
 
-.section-slide::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.5), rgba(0, 255, 204, 0.5));
-  border-radius: 3px;
+.section-card::-webkit-scrollbar-thumb,
+.projects-grid::-webkit-scrollbar-thumb,
+.skill-cloud::-webkit-scrollbar-thumb,
+.education-content::-webkit-scrollbar-thumb,
+.experience-content::-webkit-scrollbar-thumb,
+.certifications-content::-webkit-scrollbar-thumb,
+.contact-form-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #00d4ff, #00ffcc);
+  border-radius: 4px;
 }
 
-.section-slide::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.8), rgba(0, 255, 204, 0.8));
+.section-card::-webkit-scrollbar-thumb:hover,
+.projects-grid::-webkit-scrollbar-thumb:hover,
+.skill-cloud::-webkit-scrollbar-thumb:hover,
+.education-content::-webkit-scrollbar-thumb:hover,
+.experience-content::-webkit-scrollbar-thumb:hover,
+.certifications-content::-webkit-scrollbar-thumb:hover,
+.contact-form-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #00ffcc, #00d4ff);
 }
 
 /* Contact Page Styles */
@@ -1158,51 +1203,33 @@ footer {
   user-select: none;
 }
 
-/* Custom Scrollbar */
-.section-card::-webkit-scrollbar {
-  width: 8px;
-}
-
-.section-card::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-}
-
-.section-card::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #00d4ff, #00ffcc);
-  border-radius: 4px;
-}
-
-.section-card::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #00ffcc, #00d4ff);
-}
-
-/* Responsive Design - FIXED HEIGHT CONSTRAINTS */
+/* RESPONSIVE HEIGHTS */
 @media (max-width: 1024px) {
   main {
-    min-height: calc(100vh - 180px);
-    height: auto !important;
-    overflow: visible !important;
+    height: calc(100vh - 180px);
     padding: 5px 0;
   }
   
   .section-card {
     padding: 30px;
-    min-height: calc(100vh - 220px);
-    height: auto !important;
-    max-height: none !important;
+    height: calc(100vh - 220px);
     max-width: 95%;
-  }
-  
-  .section-slide {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
   }
   
   .projects-grid {
     grid-template-columns: 1fr;
-    height: auto !important;
+    height: calc(100vh - 350px);
+  }
+  
+  .skill-cloud,
+  .education-content,
+  .experience-content,
+  .certifications-content {
+    height: calc(100vh - 400px);
+  }
+  
+  .contact-form-container {
+    height: calc(100vh - 350px);
   }
 }
 
@@ -1280,24 +1307,14 @@ footer {
   }
   
   main {
-    min-height: calc(100vh - 200px);
-    height: auto !important;
-    overflow: visible !important;
+    height: calc(100vh - 200px);
     padding: 5px 0;
   }
   
   .section-card {
     padding: 25px;
-    min-height: calc(100vh - 240px);
-    height: auto !important;
-    max-height: none !important;
+    height: calc(100vh - 240px);
     max-width: 95%;
-  }
-  
-  .section-slide {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
   }
   
   .section-title {
@@ -1337,16 +1354,24 @@ footer {
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 20px;
-    height: auto !important;
+    height: calc(100vh - 320px);
   }
   
   .project-card {
     padding: 20px;
-    height: auto !important;
+    min-height: 300px;
   }
   
   .contact-form-container {
     padding: 25px;
+    height: calc(100vh - 320px);
+  }
+  
+  .skill-cloud,
+  .education-content,
+  .experience-content,
+  .certifications-content {
+    height: calc(100vh - 380px);
   }
 }
 
@@ -1368,23 +1393,13 @@ footer {
   }
   
   main {
-    min-height: calc(100vh - 280px);
-    height: auto !important;
-    overflow: visible !important;
+    height: calc(100vh - 280px);
   }
   
   .section-card {
     padding: 20px;
     border-radius: 15px;
-    min-height: calc(100vh - 320px);
-    height: auto !important;
-    max-height: none !important;
-  }
-  
-  .section-slide {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
+    height: calc(100vh - 320px);
   }
   
   .section-title {
@@ -1398,6 +1413,21 @@ footer {
   .contact-content a {
     display: block;
     margin: 10px 0;
+  }
+  
+  .projects-grid {
+    height: calc(100vh - 380px);
+  }
+  
+  .skill-cloud,
+  .education-content,
+  .experience-content,
+  .certifications-content {
+    height: calc(100vh - 420px);
+  }
+  
+  .contact-form-container {
+    height: calc(100vh - 380px);
   }
 }
 
