@@ -7,6 +7,60 @@
   <title>Yash Chaudhary | Interactive Resume</title>
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* INLINE CSS FOR MAXIMUM PRIORITY */
+    .section-card {
+      position: relative !important;
+      overflow: visible !important;
+      pointer-events: auto !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    .section-card:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 25px 50px rgba(0, 212, 255, 0.3) !important;
+    }
+    
+    .section-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+      opacity: 0;
+      transition: all 0.8s ease;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    .section-card:hover::before {
+      opacity: 1;
+      animation: flashAcross 0.8s ease-out;
+    }
+    
+    @keyframes flashAcross {
+      0% { transform: translateX(-100%); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateX(100%); opacity: 0; }
+    }
+    
+    /* FORCE ALL INTERACTIVE ELEMENTS TO WORK */
+    .project-link,
+    .ai-button,
+    .send-button,
+    .pdf-send-button,
+    .cert-link,
+    .nav-arrow,
+    button,
+    a {
+      pointer-events: auto !important;
+      cursor: pointer !important;
+      z-index: 9999 !important;
+      position: relative !important;
+    }
+  </style>
 </head>
 <body>
   <div id="particles-js"></div>
@@ -17,37 +71,37 @@
     
     <!-- Navigation Menu -->
     <nav class="main-nav">
-      <div class="nav-toggle" id="nav-toggle">
+      <div class="nav-toggle" id="nav-toggle" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
         <span></span>
         <span></span>
         <span></span>
       </div>
       <ul class="nav-menu" id="nav-menu">
-        <li><a href="#contact" onclick="goToSection(0)">Contact</a></li>
-        <li><a href="#pdf-rag" onclick="goToSection(1)">PDF Analysis</a></li>
-        <li><a href="#summary" onclick="goToSection(2)">Summary</a></li>
-        <li><a href="#education" onclick="goToSection(3)">Education</a></li>
-        <li><a href="#experience" onclick="goToSection(4)">Experience</a></li>
-        <li><a href="#skills" onclick="goToSection(5)">Skills</a></li>
-        <li><a href="#projects" onclick="goToSection(6)">Projects</a></li>
-        <li><a href="#build-together" onclick="goToSection(7)">Let's Build</a></li>
-        <li><a href="#certifications" onclick="goToSection(8)">Certifications</a></li>
+        <li><a href="#contact" onclick="goToSection(0)" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">Contact</a></li>
+        <li><a href="#pdf-rag" onclick="goToSection(1)" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">PDF Analysis</a></li>
+        <li><a href="#summary" onclick="goToSection(2)" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">Summary</a></li>
+        <li><a href="#education" onclick="goToSection(3)" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">Education</a></li>
+        <li><a href="#experience" onclick="goToSection(4)" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">Experience</a></li>
+        <li><a href="#skills" onclick="goToSection(5)" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">Skills</a></li>
+        <li><a href="#projects" onclick="goToSection(6)" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">Projects</a></li>
+        <li><a href="#build-together" onclick="goToSection(7)" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">Let's Build</a></li>
+        <li><a href="#certifications" onclick="goToSection(8)" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">Certifications</a></li>
       </ul>
     </nav>
     
     <!-- Contact Button -->
     <div class="contact-btn-container">
-      <a href="contact.html" class="contact-btn">💼 Get In Touch</a>
+      <a href="contact.html" class="contact-btn" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">💼 Get In Touch</a>
     </div>
     
     <!-- Carousel Navigation -->
     <div class="carousel-nav">
-      <button class="nav-arrow" id="prevBtn">←</button>
+      <button class="nav-arrow" id="prevBtn" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">←</button>
       <div class="section-indicator">
         <span id="currentSection">Contact Details</span>
         <span>(<span id="sectionNumber">1</span> / <span id="totalSections">9</span>)</span>
       </div>
-      <button class="nav-arrow" id="nextBtn">→</button>
+      <button class="nav-arrow" id="nextBtn" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">→</button>
     </div>
   </header>
 
@@ -56,14 +110,14 @@
       
       <!-- Contact Details Slide -->
       <div class="section-slide active" data-section="Contact Details">
-        <div class="section-card">
+        <div class="section-card" style="position: relative !important; overflow: visible !important; pointer-events: auto !important;">
           <h2 class="section-title">Contact Details</h2>
           <div class="contact-content">
             <p>📧 Email: yashch11@gmail.com</p>
             <p>📱 Phone: +91 9205161376</p>
             <p>
-              <a href="https://www.linkedin.com/in/yashchaudhary111203/" target="_blank">LinkedIn</a>
-              <a href="https://github.com/yashchaudhary265" target="_blank">GitHub</a>
+              <a href="https://www.linkedin.com/in/yashchaudhary111203/" target="_blank" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">LinkedIn</a>
+              <a href="https://github.com/yashchaudhary265" target="_blank" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">GitHub</a>
             </p>
           </div>
         </div>
@@ -71,7 +125,7 @@
 
       <!-- PDF RAG Slide -->
       <div class="section-slide" data-section="PDF Company Analysis">
-        <div class="section-card">
+        <div class="section-card" style="position: relative !important; overflow: visible !important; pointer-events: auto !important;">
           <h2 class="section-title">PDF Company Analysis</h2>
           <div class="pdf-rag-section">
             <div class="pdf-rag-title">
@@ -79,10 +133,10 @@
               Upload Company PDF for AI Analysis
             </div>
             
-            <div class="pdf-upload-area" id="pdf-upload-area">
+            <div class="pdf-upload-area" id="pdf-upload-area" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
               <div class="pdf-upload-text">📎 Drop PDF here or click to upload</div>
               <div class="pdf-upload-hint">Supports: Company profiles, brochures, annual reports</div>
-              <input type="file" id="pdf-file-input" class="pdf-file-input" accept=".pdf" />
+              <input type="file" id="pdf-file-input" class="pdf-file-input" accept=".pdf" style="pointer-events: auto !important;" />
             </div>
             
             <div class="pdf-file-info" id="pdf-file-info">
@@ -97,12 +151,12 @@
               </div>
               <div class="input-group">
                 <div class="input-wrapper">
-                  <textarea id="extracted-company-details" rows="6" readonly placeholder="AI will extract and display company information here..."></textarea>
+                  <textarea id="extracted-company-details" rows="6" readonly placeholder="AI will extract and display company information here..." style="pointer-events: auto !important; cursor: text !important;"></textarea>
                   <label>AI Extracted Company Information</label>
                 </div>
               </div>
               
-              <button type="button" id="pdf-send-company" class="pdf-send-button">
+              <button type="button" id="pdf-send-company" class="pdf-send-button" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
                 📤 Send Company Analysis to Yash
               </button>
             </div>
@@ -112,7 +166,7 @@
 
       <!-- Summary Slide -->
       <div class="section-slide" data-section="Summary">
-        <div class="section-card">
+        <div class="section-card" style="position: relative !important; overflow: visible !important; pointer-events: auto !important;">
           <h2 class="section-title">Summary</h2>
           <div class="summary-content">
             <p><strong>From Passion to Practice: How I Turned MERN Stack Development into My Daily Hobby</strong><br>
@@ -131,7 +185,7 @@
 
       <!-- Education Slide -->
       <div class="section-slide" data-section="Education">
-        <div class="section-card">
+        <div class="section-card" style="position: relative !important; overflow: visible !important; pointer-events: auto !important;">
           <h2 class="section-title">Education</h2>
           <div class="education-content">
             <div class="education-item">
@@ -161,7 +215,7 @@
 
       <!-- Experience Slide -->
       <div class="section-slide" data-section="Experience">
-        <div class="section-card">
+        <div class="section-card" style="position: relative !important; overflow: visible !important; pointer-events: auto !important;">
           <h2 class="section-title">Experience</h2>
           <div class="experience-content">
             <h3>Full Stack Developer Intern – Unified Mentor</h3>
@@ -179,46 +233,46 @@
 
       <!-- Skills Slide -->
       <div class="section-slide" data-section="Skills">
-        <div class="section-card">
+        <div class="section-card" style="position: relative !important; overflow: visible !important; pointer-events: auto !important;">
           <h2 class="section-title">Skills</h2>
           <div class="skill-cloud">
-            <div class="skill-bubble">
+            <div class="skill-bubble" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
               <img src="assets/icons/DATAVISUALIZATION.png" alt="Data Visualization" />
               <span>DATA VIZ</span>
             </div>
-            <div class="skill-bubble">
+            <div class="skill-bubble" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
               <img src="assets/icons/MONGODB.png" alt="MongoDB" />
               <span>MongoDB</span>
             </div>
-            <div class="skill-bubble">
+            <div class="skill-bubble" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
               <img src="assets/icons/python.png" alt="Python" />
               <span>Python</span>
             </div>
-            <div class="skill-bubble">
+            <div class="skill-bubble" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
               <img src="assets/icons/javascript.png" alt="JavaScript" />
               <span>JavaScript</span>
             </div>
-            <div class="skill-bubble">
+            <div class="skill-bubble" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
               <img src="assets/icons/REACT.png" alt="React" />
               <span>REACT</span>
             </div>
-            <div class="skill-bubble">
+            <div class="skill-bubble" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
               <img src="assets/icons/EXPRESSJS.png" alt="Express.js" />
               <span>EXPRESS</span>
             </div>
-            <div class="skill-bubble">
+            <div class="skill-bubble" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
               <img src="assets/icons/NEXTJS.png" alt="Next.js" />
               <span>NEXT.JS</span>
             </div>
-            <div class="skill-bubble">
+            <div class="skill-bubble" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
               <img src="assets/icons/POWERBI.png" alt="Power BI" />
               <span>POWER BI</span>
             </div>
-            <div class="skill-bubble">
+            <div class="skill-bubble" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
               <img src="assets/icons/sql.png" alt="SQL" />
               <span>SQL</span>
             </div>
-            <div class="skill-bubble">
+            <div class="skill-bubble" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
               <img src="assets/icons/git.png" alt="Git" />
               <span>Git</span>
             </div>
@@ -228,10 +282,10 @@
 
       <!-- Projects Slide -->
       <div class="section-slide" data-section="Projects">
-        <div class="section-card">
+        <div class="section-card" style="position: relative !important; overflow: visible !important; pointer-events: auto !important;">
           <h2 class="section-title">Projects</h2>
           <div class="projects-grid">
-            <div class="project-card">
+            <div class="project-card" style="pointer-events: auto !important;">
               <h3 class="project-title">🚀 INVEST – Investor-Entrepreneur Platform</h3>
               <p><strong>INVEST</strong> is a web platform that connects aspiring <strong>entrepreneurs</strong> with potential <strong>investors</strong>, offering a seamless space to submit startup ideas, express investment interests, and view real-time data via a centralized dashboard.</p>
               <p>🛠️ <strong>Tech Stack:</strong> React.js, Node.js, Express, MongoDB, Chart.js, D3.js</p>
@@ -239,9 +293,9 @@
               <p>🔒 Features include: Secure authentication, dynamic forms, data-driven dashboard, and more</p>
               <p>🌐 <strong>Frontend:</strong> Deployed on Vercel 🔗 <strong>Backend:</strong> Powered by Render 📁 <strong>Database:</strong> MongoDB Atlas</p>
               <p>This platform aims to simplify and digitize the startup–investor connection journey. Whether you're pitching ideas or seeking funding opportunities, <strong>INVEST</strong> bridges the gap efficiently.</p>
-              <a href="https://invest-rose.vercel.app/register" target="_blank" class="project-link">EXPLORE PROJECT</a>
+              <a href="https://invest-rose.vercel.app/register" target="_blank" class="project-link" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important; position: relative !important; display: inline-block !important;">EXPLORE PROJECT</a>
             </div>
-            <div class="project-card">
+            <div class="project-card" style="pointer-events: auto !important;">
               <h3 class="project-title">🌍 Soil Farming Agent – Global Soil Info App with Admin Portal</h3>
               <p><strong>Frontend (Client)</strong><br>
               <strong>Built with:</strong> React.js, Custom CSS, Three.js, Country-State Picker, EarthGlobe Visualization</p>
@@ -276,12 +330,12 @@
               • Admin dashboard for adding/modifying soil info posts dynamically.<br>
               • User-friendly UI with animated visuals and dark-themed layout.<br>
               • Fully responsive across devices and platforms.</p>
-              <a href="https://soil-farming-agent-one.vercel.app/" target="_blank" class="project-link">EXPLORE PROJECT</a>
+              <a href="https://soil-farming-agent-one.vercel.app/" target="_blank" class="project-link" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important; position: relative !important; display: inline-block !important;">EXPLORE PROJECT</a>
             </div>
-            <div class="project-card">
+            <div class="project-card" style="pointer-events: auto !important;">
               <h3 class="project-title">💼 Interactive Resume – AI-Powered Portfolio with Contact & Messaging</h3>
               <p>Created a dynamic resume web app using HTML, CSS, JS, Flask, and MongoDB backend. Integrated AI-powered message generation using Gemini API for smart contact replies. Built contact form with file upload, AI reply, and backend message handling via Flask. Deployed seamlessly on Render with unified backend/frontend routing and MongoDB Atlas.</p>
-              <a href="#" target="_blank" class="project-link">CURRENT PROJECT</a>
+              <a href="#" target="_blank" class="project-link" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important; position: relative !important; display: inline-block !important;">CURRENT PROJECT</a>
             </div>
           </div>
         </div>
@@ -289,7 +343,7 @@
 
       <!-- Let's Build Together with RAG Slide -->
       <div class="section-slide" data-section="Let's Build Together">
-        <div class="section-card">
+        <div class="section-card" style="position: relative !important; overflow: visible !important; pointer-events: auto !important;">
           <h2 class="section-title">Let's Build Together</h2>
           <div class="contact-form-container">
             
@@ -301,7 +355,7 @@
               </div>
               <div class="input-group">
                 <div class="input-wrapper">
-                  <textarea id="company-description" rows="4" placeholder="Paste your company description here for AI-tuned messaging..."></textarea>
+                  <textarea id="company-description" rows="4" placeholder="Paste your company description here for AI-tuned messaging..." style="pointer-events: auto !important; cursor: text !important; user-select: text !important;"></textarea>
                   <label for="company-description">Company Description for AI Context</label>
                 </div>
               </div>
@@ -310,30 +364,30 @@
             <form id="messageForm">
               <div class="input-group">
                 <div class="input-wrapper">
-                  <input type="text" name="name" id="user-name" required placeholder="Enter your full name" />
+                  <input type="text" name="name" id="user-name" required placeholder="Enter your full name" style="pointer-events: auto !important; cursor: text !important; user-select: text !important;" />
                   <label for="user-name">Your Name</label>
                 </div>
               </div>
               
               <div class="input-group">
                 <div class="input-wrapper">
-                  <input type="email" name="email" id="user-email" required placeholder="Enter your email address" />
+                  <input type="email" name="email" id="user-email" required placeholder="Enter your email address" style="pointer-events: auto !important; cursor: text !important; user-select: text !important;" />
                   <label for="user-email">Your Email</label>
                 </div>
               </div>
               
               <div class="input-group">
                 <div class="input-wrapper">
-                  <textarea name="message" id="user-message" rows="6" required placeholder="Type your message here or use AI to generate one..."></textarea>
+                  <textarea name="message" id="user-message" rows="6" required placeholder="Type your message here or use AI to generate one..." style="pointer-events: auto !important; cursor: text !important; user-select: text !important;"></textarea>
                   <label for="user-message">Your Message</label>
                 </div>
               </div>
 
-              <div class="button-group">
-                <button type="button" id="generate-ai" class="ai-button">
+              <div class="button-group" style="pointer-events: auto !important;">
+                <button type="button" id="generate-ai" class="ai-button" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
                   <span class="button-text">🤖 Generate with AI</span>
                 </button>
-                <button type="submit" class="send-button">
+                <button type="submit" class="send-button" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">
                   📧 Send Message
                 </button>
               </div>
@@ -344,7 +398,7 @@
 
       <!-- Certifications Slide -->
       <div class="section-slide" data-section="Certifications">
-        <div class="section-card">
+        <div class="section-card" style="position: relative !important; overflow: visible !important; pointer-events: auto !important;">
           <h2 class="section-title">Certifications</h2>
           <div class="certifications-content">
             <div class="certification-item">
@@ -352,7 +406,7 @@
               <div>
                 <h3>Career Essentials in Data Analysis</h3>
                 <p>Microsoft & LinkedIn (2025)</p>
-                <a href="https://www.linkedin.com/learning/certificates/b3f0c804f07699e135f9511e78d912ef004de5cc5a544932bbdb945187d450f9" target="_blank" class="cert-link">View Certificate</a>
+                <a href="https://www.linkedin.com/learning/certificates/b3f0c804f07699e135f9511e78d912ef004de5cc5a544932bbdb945187d450f9" target="_blank" class="cert-link" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">View Certificate</a>
               </div>
             </div>
             <div class="certification-item">
@@ -360,7 +414,7 @@
               <div>
                 <h3>Intro to JavaScript</h3>
                 <p>Great Learning (2023)</p>
-                <a href="https://drive.google.com/file/d/1ocST2EMm62KfaecAS15s8AgoTbb5lNrN/view?usp=sharing" target="_blank" class="cert-link">View Certificate</a>
+                <a href="https://drive.google.com/file/d/1ocST2EMm62KfaecAS15s8AgoTbb5lNrN/view?usp=sharing" target="_blank" class="cert-link" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">View Certificate</a>
               </div>
             </div>
             <div class="certification-item">
@@ -368,7 +422,7 @@
               <div>
                 <h3>HTML5 & CSS3</h3>
                 <p>Infosys Springboard (2023)</p>
-                <a href="https://drive.google.com/file/d/1EwX5Ih5LFFcuVTgzTc6ZM8FXnY7weiP3/view?usp=sharing" target="_blank" class="cert-link">View Certificate</a>
+                <a href="https://drive.google.com/file/d/1EwX5Ih5LFFcuVTgzTc6ZM8FXnY7weiP3/view?usp=sharing" target="_blank" class="cert-link" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">View Certificate</a>
               </div>
             </div>
             <div class="certification-item">
@@ -376,7 +430,7 @@
               <div>
                 <h3>Problem Solving (Basic)</h3>
                 <p>HackerRank (2023)</p>
-                <a href="https://drive.google.com/file/d/1m0diloXSaSeGV4BqhWPvlx6U7iM9n-4V/view?usp=sharing" target="_blank" class="cert-link">View Certificate</a>
+                <a href="https://drive.google.com/file/d/1m0diloXSaSeGV4BqhWPvlx6U7iM9n-4V/view?usp=sharing" target="_blank" class="cert-link" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">View Certificate</a>
               </div>
             </div>
             <div class="certification-item">
@@ -384,7 +438,7 @@
               <div>
                 <h3>Amazon Aurora MySQL & RDS MySQL</h3>
                 <p>AWS Training & Certification (2025)</p>
-                <a href="https://drive.google.com/file/d/1hkNVGjB1sjPOXkf_Kgmp3l_lZp4_1DhB/view?usp=sharing" target="_blank" class="cert-link">View Certificate</a>
+                <a href="https://drive.google.com/file/d/1hkNVGjB1sjPOXkf_Kgmp3l_lZp4_1DhB/view?usp=sharing" target="_blank" class="cert-link" style="pointer-events: auto !important; cursor: pointer !important; z-index: 9999 !important;">View Certificate</a>
               </div>
             </div>
           </div>
