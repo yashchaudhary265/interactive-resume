@@ -3,7 +3,49 @@ console.log("🎯 Enhanced Interactive Resume Script Loading...");
 // ✅ Backend URL Configuration
 const BACKEND_URL = "https://interactive-resume-6shg.onrender.com";
 
-// 📚 Carousel System with Book-like Animation
+// 🔧 MISSING NavigationMenu Class - CRITICAL FIX
+class NavigationMenu {
+  constructor() {
+    this.navToggle = document.getElementById('nav-toggle');
+    this.navMenu = document.getElementById('nav-menu');
+    this.init();
+  }
+
+  init() {
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    if (this.navToggle) {
+      this.navToggle.addEventListener('click', () => this.toggleMenu());
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!this.navToggle?.contains(e.target) && !this.navMenu?.contains(e.target)) {
+        this.closeMenu();
+      }
+    });
+
+    const navLinks = this.navMenu?.querySelectorAll('a');
+    navLinks?.forEach(link => {
+      link.addEventListener('click', () => {
+        this.closeMenu();
+      });
+    });
+  }
+
+  toggleMenu() {
+    this.navToggle?.classList.toggle('active');
+    this.navMenu?.classList.toggle('active');
+  }
+
+  closeMenu() {
+    this.navToggle?.classList.remove('active');
+    this.navMenu?.classList.remove('active');
+  }
+}
+
+// 📚 Carousel System with Book-like Animation - ENHANCED WITH BUTTON FIXES
 class CarouselSystem {
   constructor() {
     this.slides = document.querySelectorAll('.section-slide');
@@ -33,12 +75,26 @@ class CarouselSystem {
   }
 
   setupEventListeners() {
-    // Navigation buttons
+    // Navigation buttons - ENHANCED WITH CRITICAL FIXES
     if (this.prevBtn) {
-      this.prevBtn.addEventListener('click', () => this.previousSlide());
+      this.prevBtn.style.pointerEvents = 'auto';
+      this.prevBtn.style.cursor = 'pointer';
+      this.prevBtn.style.zIndex = '1000';
+      this.prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.previousSlide();
+      });
     }
     if (this.nextBtn) {
-      this.nextBtn.addEventListener('click', () => this.nextSlide());
+      this.nextBtn.style.pointerEvents = 'auto';
+      this.nextBtn.style.cursor = 'pointer';
+      this.nextBtn.style.zIndex = '1000';
+      this.nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.nextSlide();
+      });
     }
 
     // Keyboard navigation
@@ -136,6 +192,7 @@ class CarouselSystem {
     // Reset all slides first
     this.slides.forEach(slide => {
       slide.classList.remove('active', 'next', 'prev');
+      slide.style.pointerEvents = 'none';
     });
 
     if (direction === 'next') {
@@ -158,6 +215,7 @@ class CarouselSystem {
         targetSlide.style.opacity = '1';
         targetSlide.classList.remove('next');
         targetSlide.classList.add('active');
+        targetSlide.style.pointerEvents = 'auto';
       });
 
     } else {
@@ -180,6 +238,7 @@ class CarouselSystem {
         targetSlide.style.opacity = '1';
         targetSlide.classList.remove('prev');
         targetSlide.classList.add('active');
+        targetSlide.style.pointerEvents = 'auto';
       });
     }
   }
@@ -210,10 +269,12 @@ class CarouselSystem {
         slide.classList.add('active');
         slide.style.transform = 'rotateY(0deg) translateX(0) scale(1)';
         slide.style.opacity = '1';
+        slide.style.pointerEvents = 'auto';
       } else {
         slide.classList.remove('active');
         slide.style.transform = 'rotateY(90deg) translateX(50%) scale(0.8)';
         slide.style.opacity = '0';
+        slide.style.pointerEvents = 'none';
       }
     });
     this.updateNavigationButtons();
@@ -238,11 +299,11 @@ class CarouselSystem {
 
     setTimeout(() => {
       this.isAnimating = false;
-    }, 800);
+    }, 1200);
   }
 }
 
-// 🤖 Enhanced AI System with RAG Implementation
+// 🤖 Enhanced AI System with RAG Implementation - FIXED BUTTON INTERACTIONS
 class EnhancedAI {
   constructor() {
     this.button = document.getElementById('generate-ai');
@@ -253,7 +314,17 @@ class EnhancedAI {
 
   init() {
     if (this.button) {
-      this.button.addEventListener('click', () => this.generateMessage());
+      // CRITICAL FIX: Ensure button is properly clickable
+      this.button.style.pointerEvents = 'auto';
+      this.button.style.cursor = 'pointer';
+      this.button.style.zIndex = '1000';
+      this.button.style.position = 'relative';
+      
+      this.button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.generateMessage();
+      });
       this.setupButtonEffects();
     }
   }
@@ -448,7 +519,7 @@ The message should sound like ${name} is reaching out TO Yash for collaboration.
   }
 }
 
-// 📧 Enhanced Form Handler with Better Input Management
+// 📧 Enhanced Form Handler with Better Input Management - FIXED
 class FormHandler {
   constructor() {
     this.form = document.getElementById('messageForm');
@@ -468,7 +539,7 @@ class FormHandler {
     const inputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
     
     inputs.forEach(input => {
-      // Ensure inputs are properly clickable and selectable
+      // CRITICAL FIX: Ensure inputs are properly clickable and selectable
       input.style.pointerEvents = 'auto';
       input.style.userSelect = 'text';
       input.style.cursor = 'text';
@@ -476,6 +547,7 @@ class FormHandler {
       input.style.mozUserSelect = 'text';
       input.style.msUserSelect = 'text';
       input.style.touchAction = 'manipulation';
+      input.style.zIndex = '100';
       
       // Remove any conflicting properties
       input.removeAttribute('readonly');
@@ -714,7 +786,7 @@ class FormHandler {
   }
 }
 
-// 📄 PDF Upload Handler
+// 📄 PDF Upload Handler - FIXED BUTTON INTERACTIONS
 class PDFHandler {
   constructor() {
     this.uploadArea = document.getElementById('pdf-upload-area');
@@ -733,6 +805,8 @@ class PDFHandler {
 
   setupEventListeners() {
     if (this.uploadArea) {
+      this.uploadArea.style.pointerEvents = 'auto';
+      this.uploadArea.style.cursor = 'pointer';
       this.uploadArea.addEventListener('click', () => this.fileInput?.click());
       this.setupDragAndDrop();
     }
@@ -746,7 +820,14 @@ class PDFHandler {
     }
 
     if (this.sendButton) {
-      this.sendButton.addEventListener('click', () => this.sendCompanyAnalysis());
+      this.sendButton.style.pointerEvents = 'auto';
+      this.sendButton.style.cursor = 'pointer';
+      this.sendButton.style.zIndex = '1000';
+      this.sendButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.sendCompanyAnalysis();
+      });
     }
   }
 
@@ -877,7 +958,7 @@ System: Enhanced Interactive Resume AI`
   }
 }
 
-// 🎨 Enhanced UI Effects
+// 🎨 Enhanced UI Effects - WITH CRITICAL BUTTON FIXES
 class UIEffects {
   constructor() {
     this.init();
@@ -889,6 +970,79 @@ class UIEffects {
     this.setupProjectCardEffects();
     this.setupParticleInteractions();
     this.setupAccessibility();
+    this.fixAllInteractions(); // CRITICAL FIX
+  }
+
+  // CRITICAL METHOD: Fix all button and link interactions
+  fixAllInteractions() {
+    // Fix project links specifically
+    document.querySelectorAll('.project-link').forEach(link => {
+      link.style.pointerEvents = 'auto';
+      link.style.cursor = 'pointer';
+      link.style.zIndex = '9999';
+      link.style.position = 'relative';
+      
+      // Remove existing listeners to avoid conflicts
+      const newLink = link.cloneNode(true);
+      link.parentNode.replaceChild(newLink, link);
+      
+      // Add fresh click handler
+      newLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Project link clicked:', this.href);
+        if (this.href && this.href !== '#' && this.href !== 'javascript:void(0)') {
+          window.open(this.href, '_blank', 'noopener,noreferrer');
+        }
+      });
+
+      // Add visual feedback
+      newLink.addEventListener('mousedown', function() {
+        this.style.transform = 'scale(0.98)';
+      });
+
+      newLink.addEventListener('mouseup', function() {
+        this.style.transform = '';
+      });
+    });
+
+    // Fix certification links
+    document.querySelectorAll('.cert-link').forEach(link => {
+      link.style.pointerEvents = 'auto';
+      link.style.cursor = 'pointer';
+      link.style.zIndex = '1000';
+      link.style.position = 'relative';
+      
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (this.href && this.href !== '#') {
+          window.open(this.href, '_blank', 'noopener,noreferrer');
+        }
+      });
+    });
+
+    // Fix navigation links
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.style.pointerEvents = 'auto';
+      link.style.cursor = 'pointer';
+      link.style.zIndex = '1000';
+    });
+
+    // Fix contact button
+    const contactBtn = document.querySelector('.contact-btn');
+    if (contactBtn) {
+      contactBtn.style.pointerEvents = 'auto';
+      contactBtn.style.cursor = 'pointer';
+      contactBtn.style.zIndex = '1000';
+    }
+
+    // Fix all buttons
+    document.querySelectorAll('button').forEach(button => {
+      button.style.pointerEvents = 'auto';
+      button.style.cursor = 'pointer';
+      button.style.zIndex = '1000';
+    });
   }
 
   setupProfileImageInteraction() {
@@ -907,6 +1061,10 @@ class UIEffects {
 
   setupSkillBubbleEffects() {
     document.querySelectorAll('.skill-bubble').forEach(bubble => {
+      bubble.style.pointerEvents = 'auto';
+      bubble.style.cursor = 'pointer';
+      bubble.style.zIndex = '100';
+      
       bubble.addEventListener('mouseenter', () => {
         bubble.style.animationPlayState = 'paused';
         bubble.style.transform = 'translateY(-15px) scale(1.15) rotateY(10deg)';
@@ -1119,7 +1277,7 @@ class ResponsiveHandler {
   }
 }
 
-// 🚀 Main Application
+// 🚀 Main Application - ENHANCED WITH CRITICAL FIXES
 class EnhancedResumeApp {
   constructor() {
     this.components = {};
@@ -1150,69 +1308,57 @@ class EnhancedResumeApp {
 
       console.log('✅ All components initialized successfully');
       this.setupGlobalEvents();
-      this.fixButtonInteractions();
+      this.finalFixButtonInteractions();
       
     } catch (error) {
       console.error('❌ Error initializing components:', error);
     }
   }
 
-  fixButtonInteractions() {
-    // Fix all button interactions
-    document.querySelectorAll('button, .project-link, .cert-link').forEach(element => {
-      element.style.pointerEvents = 'auto';
-      element.style.cursor = 'pointer';
-      element.style.zIndex = '100';
-      
-      // Ensure click events work
-      element.addEventListener('click', function(e) {
-        e.stopPropagation();
-        // For links, ensure they work
-        if (this.tagName === 'A' && this.href) {
-          if (this.target === '_blank') {
-            window.open(this.href, '_blank');
-          } else {
-            window.location.href = this.href;
+  // CRITICAL: Final fix for all button interactions
+  finalFixButtonInteractions() {
+    // Wait for DOM to be fully ready
+    setTimeout(() => {
+      // Fix all project links
+      document.querySelectorAll('.project-link').forEach((link, index) => {
+        console.log(`Fixing project link ${index + 1}:`, link.href);
+        link.style.cssText = `
+          pointer-events: auto !important;
+          cursor: pointer !important;
+          z-index: 9999 !important;
+          position: relative !important;
+          display: inline-block !important;
+        `;
+        
+        // Create new element to avoid listener conflicts
+        const newLink = link.cloneNode(true);
+        link.parentNode.replaceChild(newLink, link);
+        
+        newLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Project link clicked:', this.textContent, this.href);
+          
+          if (this.href && this.href !== '#' && !this.href.includes('javascript:')) {
+            window.open(this.href, '_blank', 'noopener,noreferrer');
           }
-        }
-      });
+        });
 
-      // Add visual feedback
-      element.addEventListener('mousedown', function() {
-        this.style.transform = 'scale(0.98)';
-      });
+        // Add visual feedback
+        newLink.addEventListener('mouseenter', function() {
+          this.style.background = '#00ffcc';
+          this.style.color = '#000';
+          this.style.transform = 'translateY(-2px)';
+        });
 
-      element.addEventListener('mouseup', function() {
-        this.style.transform = '';
+        newLink.addEventListener('mouseleave', function() {
+          this.style.background = '';
+          this.style.color = '#00ffcc';
+          this.style.transform = '';
+        });
       });
-    });
-
-    // Specific fix for project links
-    document.querySelectorAll('.project-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (this.href && this.href !== '#') {
-          window.open(this.href, '_blank');
-        }
-      });
-    });
-
-    // Specific fix for AI and send buttons
-    const aiButton = document.getElementById('generate-ai');
-    const sendButton = document.querySelector('.send-button');
-    
-    if (aiButton) {
-      aiButton.style.pointerEvents = 'auto';
-      aiButton.style.cursor = 'pointer';
-      aiButton.style.zIndex = '101';
-    }
-    
-    if (sendButton) {
-      sendButton.style.pointerEvents = 'auto';
-      sendButton.style.cursor = 'pointer';
-      sendButton.style.zIndex = '101';
-    }
+      
+    }, 1000); // Wait 1 second for everything to load
   }
 
   setupGlobalEvents() {
@@ -1284,9 +1430,47 @@ window.enhancedResume = {
 
 // Global function for navigation links
 function goToSection(index) {
+  console.log('goToSection called with index:', index);
   if (window.enhancedResume && window.enhancedResume.app && window.enhancedResume.app.components.carouselSystem) {
     window.enhancedResume.app.components.carouselSystem.goToSlide(index);
   }
 }
+
+// CRITICAL BUTTON FIX - ADD THIS
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(() => {
+    // Fix all project links
+    document.querySelectorAll('.project-link').forEach(link => {
+      link.style.cssText = `
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        z-index: 9999 !important;
+        position: relative !important;
+      `;
+      
+      const newLink = link.cloneNode(true);
+      link.parentNode.replaceChild(newLink, link);
+      
+      newLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (this.href && this.href !== '#') {
+          window.open(this.href, '_blank');
+        }
+      });
+    });
+    
+    // Fix navigation buttons
+    document.querySelectorAll('.nav-arrow').forEach(btn => {
+      btn.style.cssText += 'pointer-events: auto !important; cursor: pointer !important;';
+    });
+    
+    // Fix AI and Send buttons
+    document.querySelectorAll('.ai-button, .send-button').forEach(btn => {
+      btn.style.cssText += 'pointer-events: auto !important; cursor: pointer !important;';
+    });
+    
+  }, 1000);
+});
 
 console.log('🎉 Enhanced Interactive Resume Script Loaded Successfully!');
