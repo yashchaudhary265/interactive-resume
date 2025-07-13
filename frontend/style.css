@@ -253,13 +253,14 @@ header {
   color: #00ffcc;
 }
 
-/* Main Container */
+/* Main Container - FIXED HEIGHT CONSTRAINTS */
 main {
   min-height: calc(100vh - 200px);
-  overflow: visible;
+  overflow: visible !important;
   position: relative;
   perspective: 1500px;
   padding: 10px 0;
+  height: auto !important;
 }
 
 .carousel-container {
@@ -268,15 +269,19 @@ main {
   padding: 0 20px;
   position: relative;
   min-height: 100%;
+  height: auto !important;
+  overflow: visible !important;
 }
 
-/* Section Slides with Enhanced Smooth Book Animation - FIXED INTERACTIONS */
+/* Section Slides - FIXED HEIGHT AND POINTER EVENTS */
 .section-slide {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   min-height: calc(100vh - 220px);
+  height: auto !important;
+  max-height: none !important;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -288,7 +293,7 @@ main {
   backface-visibility: hidden;
   will-change: transform, opacity;
   padding: 20px 0;
-  overflow: visible;
+  overflow: visible !important;
   pointer-events: none !important;
 }
 
@@ -298,6 +303,8 @@ main {
   z-index: 10;
   transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
   pointer-events: auto !important;
+  overflow: visible !important;
+  height: auto !important;
 }
 
 .section-slide.active * {
@@ -322,7 +329,7 @@ main {
   pointer-events: none !important;
 }
 
-/* Section Card */
+/* Section Card - FIXED HEIGHT */
 .section-card {
   background: rgba(0, 0, 0, 0.9);
   border-radius: 20px;
@@ -333,11 +340,12 @@ main {
     inset 0 0 20px rgba(0, 212, 255, 0.05);
   backdrop-filter: blur(20px);
   position: relative;
-  overflow: visible;
+  overflow: visible !important;
   width: 100%;
   max-width: 950px;
   min-height: calc(100vh - 280px);
-  height: auto;
+  height: auto !important;
+  max-height: none !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -534,12 +542,14 @@ main {
   pointer-events: none;
 }
 
-/* Projects Section - ENHANCED FIXES */
+/* Projects Section - FIXED HEIGHT AND ACCESSIBILITY */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 30px;
   margin-top: 20px;
+  height: auto !important;
+  overflow: visible !important;
 }
 
 .project-card {
@@ -549,9 +559,10 @@ main {
   border: 1px solid rgba(0, 212, 255, 0.2);
   transition: all 0.3s ease;
   position: relative;
-  overflow: visible;
+  overflow: visible !important;
   pointer-events: auto !important;
   z-index: 50 !important;
+  height: auto !important;
 }
 
 .project-card:hover {
@@ -577,7 +588,7 @@ main {
   user-select: text;
 }
 
-/* PROJECT LINK - CRITICAL FIXES */
+/* PROJECT LINK - MAXIMUM ACCESSIBILITY */
 .project-link {
   display: inline-block !important;
   margin-top: 15px !important;
@@ -593,6 +604,7 @@ main {
   z-index: 99999 !important;
   position: relative !important;
   background: transparent !important;
+  touch-action: manipulation !important;
 }
 
 .project-link:hover {
@@ -1163,22 +1175,32 @@ footer {
   background: linear-gradient(135deg, #00ffcc, #00d4ff);
 }
 
-/* Responsive Design */
+/* Responsive Design - FIXED HEIGHT CONSTRAINTS */
 @media (max-width: 1024px) {
   main {
     min-height: calc(100vh - 180px);
+    height: auto !important;
+    overflow: visible !important;
     padding: 5px 0;
   }
   
   .section-card {
     padding: 30px;
     min-height: calc(100vh - 220px);
-    height: auto;
+    height: auto !important;
+    max-height: none !important;
     max-width: 95%;
+  }
+  
+  .section-slide {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
   
   .projects-grid {
     grid-template-columns: 1fr;
+    height: auto !important;
   }
 }
 
@@ -1257,14 +1279,23 @@ footer {
   
   main {
     min-height: calc(100vh - 200px);
+    height: auto !important;
+    overflow: visible !important;
     padding: 5px 0;
   }
   
   .section-card {
     padding: 25px;
     min-height: calc(100vh - 240px);
-    height: auto;
+    height: auto !important;
+    max-height: none !important;
     max-width: 95%;
+  }
+  
+  .section-slide {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
   
   .section-title {
@@ -1304,10 +1335,12 @@ footer {
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+    height: auto !important;
   }
   
   .project-card {
     padding: 20px;
+    height: auto !important;
   }
   
   .contact-form-container {
@@ -1334,13 +1367,22 @@ footer {
   
   main {
     min-height: calc(100vh - 280px);
+    height: auto !important;
+    overflow: visible !important;
   }
   
   .section-card {
     padding: 20px;
     border-radius: 15px;
     min-height: calc(100vh - 320px);
-    height: auto;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  .section-slide {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
   
   .section-title {
